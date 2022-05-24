@@ -4,6 +4,7 @@ const typeDefs = gql`
   type User {
     _id: ID!
     name: String!
+    email: String!
     password: String!
     outings: [Outing]!
   }
@@ -22,14 +23,66 @@ const typeDefs = gql`
   }
 
   type Query {
-    tech: [Tech]
-    matchups(_id: String): [Matchup]
+    user(_id: String ): [User]
+    outings: [Outing]
   }
 
   type Mutation {
-    createMatchup(tech1: String!, tech2: String!): Matchup
-    createVote(_id: String!, techNum: Int!): Matchup
+    addUser (name: String!, email: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    addOuting(outing_name: String!, date_time: String!): Outing
+    addRestaurantName(
+      outingID: ID!
+      restaurant_name: String!
+      restaurant_URL: String
+      restaurant_time: String
+    ): Outing
+   
+    addEventName(
+      outingID: ID!
+      event_name: String!
+      event_URL: String
+      event_time: String
+      event_location: String
+    ): Outing
+    
+    removeRestaurant(
+      outingID: ID!
+      restaurant_name: String!
+      restaurant_URL: String
+      restaurant_time: String
+    ): Outing
+    removeEvent(
+      outingID: ID!
+      event_name: String!
+      event_URL: String
+      event_time: String
+      event_location: String
+    )
   }
+
 `;
 
 module.exports = typeDefs;
+
+//  addRestaurantURL(
+//      outingID: ID!
+//      restaurant_URL: String!
+//    ): Outing
+//    addRestaurantTime(
+//      outingID: ID!
+//      restaurant_time: String!
+//    ): Outing
+
+// addEventURL(
+//   outingID: ID!
+//   event_URL: String!
+// ): Outing
+// addEventTime(
+//   outingID: ID!
+//   event_time: String!
+// ): Outing
+// addEventLocation(
+//   outingID: ID!
+//   event_location: String!
+// ): Outing
