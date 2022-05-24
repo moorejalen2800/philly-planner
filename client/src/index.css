@@ -18,14 +18,22 @@ html {
 /**
  * Remove the margin in all browsers.
  */
+
+#dinner {
+  background: rgba(238, 238, 238, 0.4);
+}
+.dinnerText {
+  font-weight: 300;
+  align-items: center;
+  justify-content: center;
+}
+
 body {
   margin: 0;
-  /* background-image: url("../src/images/skyline.jpg");
+  background-image: url("../src/images/skyline.jpg");
   background-position: center;
-  background-size: "cover";
-  background-repeat: "no-repeat";
-  max-width: 200px;
-  max-height: 200px; */
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 /**
@@ -355,8 +363,8 @@ END NORMALIZE CSS
   box-sizing: border-box;
 }
 
-html,
-body {
+html
+/* body */ {
   min-height: 100%;
 }
 
@@ -461,7 +469,7 @@ a:hover {
 
 .min-100-vh {
   min-height: 100vh;
-  background-image: url("../../client/src/images/skyline.jpg");
+  /* background-image: url("../../client/src/images/skyline.jpg"); */
 }
 
 .min-100-vw {
@@ -930,9 +938,9 @@ a:hover {
 }
 
 /* BACKGROUND UTILS */
-.bg-primary {
+/* .bg-primary {
   background-image: url("../../client/src/images/skyline.jpg");
-}
+} */
 
 .bg-info {
   background-color: #1bbc9b !important;

@@ -100,8 +100,8 @@ const Dinner = () => {
           )}
         </div>
       </form>
-      <div class="card-body m-5">
-        <label>Whatcha Feelin' For Dinner?</label>
+      <div className="dinnerCard card-body m-5">
+        <label className="dinnerText">Whatcha Feelin' For Dinner?</label>
         <br></br>
         <input
           onChange={handleChange}
