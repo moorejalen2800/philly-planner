@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../../utils/queries";
-import background from "../../images/skyline.jpg";
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
-function JSXVariables() {
+function Cal() {
+  const [value, onChange] = useState(new Date());
+
   return (
-    <div className="main-container">
-      <h1>CALENDAR</h1>
+    <div>
+      <Calendar onChange={onChange} value={value} />
     </div>
   );
 }
 
-export default JSXVariables;
+export default Cal;

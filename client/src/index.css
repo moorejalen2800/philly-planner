@@ -19,6 +19,13 @@ html {
  * Remove the margin in all browsers.
  */
 
+.displayCards {
+  background-color: white;
+  margin: 5px;
+  display: grid;
+  font-weight: 700;
+}
+
 #dinner {
   background: rgba(238, 238, 238, 0.4);
 }

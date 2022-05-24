@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Dinner from "./pages/Components/dinner";
 import NavBar from "./pages/Components/navbar";
+import Display from "./pages/Components/display";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -17,6 +18,7 @@ function App() {
         <div className="flex-column justify-center align-center min-100-vh bg-primary">
           <Routes>
             <Route path="/" element={<Dinner />} />
+            <Route path="/display" element={<Display />} />
           </Routes>
         </div>
       </Router>

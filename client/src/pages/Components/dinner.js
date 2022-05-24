@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_MATCHUPS } from "../../utils/queries";
 import background from "../../images/skyline.jpg";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
@@ -22,12 +23,15 @@ async function getApi(budget, dinnerOption) {
     });
     const data = await response.json();
     console.log(data);
+    localStorage.setItem("restArr", JSON.stringify(data));
   } catch (error) {
     console.log(error);
   }
 }
 
 const Dinner = () => {
+  const navigate = useNavigate();
+
   const [formState, setFormState] = useState({
     budget: "",
     dinnerOption: "",
@@ -41,6 +45,7 @@ const Dinner = () => {
   useEffect(() => {
     getApi(formState.budget, formState.dinnerOption);
   }, []);
+
   // let resPrice = this.menu.value;
 
   const handleChange = (event) => {
@@ -54,9 +59,10 @@ const Dinner = () => {
   //   .then((res) => setFormState(res.data))
   //   .catch((err) => console.log(err));
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    getApi(formState.budget, formState.dinnerOption);
+    await getApi(formState.budget, formState.dinnerOption);
+    navigate("/display");
   };
 
   // user names event date
