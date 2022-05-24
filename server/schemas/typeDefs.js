@@ -13,6 +13,7 @@ const typeDefs = gql`
     _id: ID!
     date_time: String
     outing_name: String!
+    created_at: String
     restaurant_name: String
     restaurant_URL: String
     restaurant_time: String
@@ -23,8 +24,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    user(_id: String ): [User]
-    outings: [Outing]
+    user(name: String ): User
+    outings(name: String): [Outing]
+    outing(outingId: ID!): Outing
   }
 
   type Mutation {

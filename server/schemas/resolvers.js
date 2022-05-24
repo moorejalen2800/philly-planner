@@ -1,11 +1,15 @@
-const { Tech, Matchup } = require('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { User, Outing } = require('../models');
+const { signToken } = require('../utils/auth');
+
 
 const resolvers = {
   Query: {
-    tech: async () => {
-      return Tech.find({});
+    user: async (parent, { _id }) => {
+      const params = _id ? { _id } : {};
+      return await User.find(params).populate('outings');
     },
-    matchups: async (parent, { _id }) => {
+    outings: async (parent, { _id }) => {
       const params = _id ? { _id } : {};
       return Matchup.find(params);
     },
