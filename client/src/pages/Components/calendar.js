@@ -8,6 +8,7 @@ function Cal() {
   return (
     <div>
       <Calendar onChange={onChange} value={value} />
+      console.log(Calendar.value);
     </div>
   );
 }
