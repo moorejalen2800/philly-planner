@@ -3,13 +3,14 @@ import { useQuery } from "@apollo/client";
 import { QUERY_MATCHUPS } from "../../utils/queries";
 import background from "../../images/skyline.jpg";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
 async function getApi(budget, dinnerOption) {
   var requestUrl =
     cors +
-    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}`;
+    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}&radius=5000`;
 
   // `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${resPrice}&categories=${resActivity}`;
 
@@ -22,12 +23,15 @@ async function getApi(budget, dinnerOption) {
     });
     const data = await response.json();
     console.log(data);
+    localStorage.setItem("restArr", JSON.stringify(data));
   } catch (error) {
     console.log(error);
   }
 }
 
 const Dinner = () => {
+  const navigate = useNavigate();
+
   const [formState, setFormState] = useState({
     budget: "",
     dinnerOption: "",
@@ -41,6 +45,7 @@ const Dinner = () => {
   useEffect(() => {
     getApi(formState.budget, formState.dinnerOption);
   }, []);
+
   // let resPrice = this.menu.value;
 
   const handleChange = (event) => {
@@ -48,13 +53,24 @@ const Dinner = () => {
 
     setFormState({ ...formState, [name]: value });
   };
+
+  // const searchForm = (query) =>
+  // dinnerOption.search(query)
+  //   .then((res) => setFormState(res.data))
+  //   .catch((err) => console.log(err));
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    await getApi(formState.budget, formState.dinnerOption);
+    navigate("/display");
+  };
+
+  // user names event date
+  // populate calendar and select date
+  // fill out budgert and ethiccnic food
+  // needs banner at top with login logout info
   return (
-    <div
-      style={{
-        backgroundImage: `url(${background})`,
-      }}
-      className="card card-rounded w-50"
-    >
+    <div id="dinner" className="card card-rounded w-50">
       <div className="card-header bg-dark text-center">
         <h1>Plan The Perfect Philly Night!</h1>
       </div>
@@ -90,8 +106,8 @@ const Dinner = () => {
           )}
         </div>
       </form>
-      <div class="card-body m-5">
-        <label>Whatcha Feelin' For Dinner?</label>
+      <div className="dinnerCard card-body m-5">
+        <label className="dinnerText">Whatcha Feelin' For Dinner?</label>
         <br></br>
         <input
           onChange={handleChange}
@@ -103,9 +119,11 @@ const Dinner = () => {
 
       <div className="card-footer text-center m-3">
         <h2>Ready to Move To The Next Step?</h2>
-        <Link to="/matchup">
-          <button className="btn btn-lg btn-danger">Plan Your Next Step</button>
-        </Link>
+        {/* <Link to="/matchup"> */}
+        <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">
+          Plan Your Next Step
+        </button>
+        {/* </Link> */}
       </div>
     </div>
   );
