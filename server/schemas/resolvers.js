@@ -47,22 +47,25 @@ const resolvers = {
     },
 
     addRestaurant: async (parent, args) => {
-      if (args.restaurant_name) {
-        let restaurant = await Outing.findOneAndUpdate(
-          args._id,
-          { $add: { args.restaurant_name:  } },
-          { new: true }
-        );
-
-      }
-      
-      let vote = await Matchup.findOneAndUpdate(
-        args._id,
-        { $inc: { [`tech${techNum}_votes`]: 1 } },
+      const restaurant = await Outing.findOneAndUpdate(
+        { "_id" : args._id},
+        { $set: { restaurant_name: args.restaurant_name, 
+          restaurant_URL: args.restaurant_URL, 
+          restaurant_location: args.restaurant_location }},
         { new: true }
       );
-      return vote;
+      return restaurant;
     },
+
+    removeRestaurant: async (parent, args) => {
+      return Outing.findOneAndUpdate(
+        { _id : args._id},
+        { $pull: { restaurant_name: args.restaurant_name, 
+          restaurant_URL: args.restaurant_URL, 
+          restaurant_location: args.restaurant_location }},
+        { new: true }
+      );
+    }
   },
 };
 
