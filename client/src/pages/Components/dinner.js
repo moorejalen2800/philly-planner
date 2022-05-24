@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../utils/queries";
-import background from "../images/skyline.jpg";
+import { QUERY_MATCHUPS } from "../../utils/queries";
+import background from "../../images/skyline.jpg";
 import { useEffect } from "react";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
@@ -9,7 +9,9 @@ const cors = "https://cors-anywhere.herokuapp.com/";
 async function getApi() {
   var requestUrl =
     cors +
-    "https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=1&categories=italian";
+    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=1&categories=italian`;
+
+  // `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${resPrice}&categories=${resActivity}`;
 
   try {
     const response = await fetch(requestUrl, {
@@ -25,7 +27,7 @@ async function getApi() {
   }
 }
 
-const Home = () => {
+const Dinner = () => {
   const { loading, data } = useQuery(QUERY_MATCHUPS, {
     fetchPolicy: "no-cache",
   });
@@ -35,6 +37,8 @@ const Home = () => {
   useEffect(() => {
     getApi();
   }, []);
+  // let resPrice = this.menu.value;
+
   return (
     <div
       style={{
@@ -54,6 +58,7 @@ const Home = () => {
           <option value="3">$$$</option>
           <option value="4">$$$$</option>
         </select>
+
         {loading ? (
           <div>Loading...</div>
         ) : (
@@ -70,14 +75,20 @@ const Home = () => {
           </ul>
         )}
       </div>
+      <div class="card-body m-5">
+        <label>Whatcha Feelin' For Dinner?</label>
+        <br></br>
+        <input placeholder="Italian, Mexican, etc.."></input>
+      </div>
+
       <div className="card-footer text-center m-3">
-        <h2>Ready to create a new matchup?</h2>
+        <h2>Ready to Move To The Next Step?</h2>
         <Link to="/matchup">
-          <button className="btn btn-lg btn-danger">Create Matchup!</button>
+          <button className="btn btn-lg btn-danger">Plan Your Next Step</button>
         </Link>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Dinner;
