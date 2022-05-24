@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_MATCHUPS } from "../../utils/queries";
 import background from "../../images/skyline.jpg";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
-async function getApi() {
+async function getApi(budget, dinnerOption) {
   var requestUrl =
     cors +
-    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=1&categories=italian`;
+    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}`;
 
   // `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${resPrice}&categories=${resActivity}`;
 
@@ -28,6 +28,10 @@ async function getApi() {
 }
 
 const Dinner = () => {
+  const [formState, setFormState] = useState({
+    budget: "",
+    dinnerOption: "",
+  });
   const { loading, data } = useQuery(QUERY_MATCHUPS, {
     fetchPolicy: "no-cache",
   });
@@ -35,10 +39,15 @@ const Dinner = () => {
   const matchupList = data?.matchups || [];
 
   useEffect(() => {
-    getApi();
+    getApi(formState.budget, formState.dinnerOption);
   }, []);
   // let resPrice = this.menu.value;
 
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({ ...formState, [name]: value });
+  };
   return (
     <div
       style={{
@@ -49,36 +58,47 @@ const Dinner = () => {
       <div className="card-header bg-dark text-center">
         <h1>Plan The Perfect Philly Night!</h1>
       </div>
-      <div className="card-body m-5">
-        <label>Select Budget Range</label>
-        <select>
-          {" "}
-          <option value="1">$</option>
-          <option value="2">$$</option>
-          <option value="3">$$$</option>
-          <option value="4">$$$$</option>
-        </select>
+      <form>
+        <div className="card-body m-5">
+          <label>Select Budget Range</label>
+          <select
+            name="budget"
+            value={formState.budget}
+            onChange={handleChange}
+          >
+            {" "}
+            <option value="1">$</option>
+            <option value="2">$$</option>
+            <option value="3">$$$</option>
+            <option value="4">$$$$</option>
+          </select>
 
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <ul className="square">
-            {matchupList.map((matchup) => {
-              return (
-                <li key={matchup._id}>
-                  <Link to={{ pathname: `/matchup/${matchup._id}` }}>
-                    {matchup.tech1} vs. {matchup.tech2}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      </div>
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <ul className="square">
+              {matchupList.map((matchup) => {
+                return (
+                  <li key={matchup._id}>
+                    <Link to={{ pathname: `/matchup/${matchup._id}` }}>
+                      {matchup.tech1} vs. {matchup.tech2}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      </form>
       <div class="card-body m-5">
         <label>Whatcha Feelin' For Dinner?</label>
         <br></br>
-        <input placeholder="Italian, Mexican, etc.."></input>
+        <input
+          onChange={handleChange}
+          name="dinnerOption"
+          value={formState.dinnerOption}
+          placeholder="Italian, Mexican, etc.."
+        ></input>
       </div>
 
       <div className="card-footer text-center m-3">
