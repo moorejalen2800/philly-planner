@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Dinner from "./pages/Components/dinner";
+import Calendar from "./pages/Components/calendar";
 
 const client = new ApolloClient({
   uri: "/graphql",
