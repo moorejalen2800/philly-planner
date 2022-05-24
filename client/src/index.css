@@ -20,6 +20,12 @@ html {
  */
 body {
   margin: 0;
+  /* background-image: url("../src/images/skyline.jpg");
+  background-position: center;
+  background-size: "cover";
+  background-repeat: "no-repeat";
+  max-width: 200px;
+  max-height: 200px; */
 }
 
 /**
