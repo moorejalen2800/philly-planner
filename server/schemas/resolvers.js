@@ -41,14 +41,23 @@ const resolvers = {
       return { token, user };
     },
     
-    
-    createMatchup: async (parent, args) => {
-      const matchup = await Matchup.create(args);
-      return matchup;
+    addRestaurant: async (parent, args) => {
+      const outing = await Outing.create(args);
+      return outing;
     },
-    createVote: async (parent, { _id, techNum }) => {
-      const vote = await Matchup.findOneAndUpdate(
-        { _id },
+
+    addRestaurant: async (parent, args) => {
+      if (args.restaurant_name) {
+        let restaurant = await Outing.findOneAndUpdate(
+          args._id,
+          { $add: { args.restaurant_name:  } },
+          { new: true }
+        );
+
+      }
+      
+      let vote = await Matchup.findOneAndUpdate(
+        args._id,
         { $inc: { [`tech${techNum}_votes`]: 1 } },
         { new: true }
       );
