@@ -64,87 +64,60 @@ const Dinner = () => {
   // fill out budgert and ethiccnic food
   // needs banner at top with login logout info
   return (
-    <div id="container">
-      <div id="calendar" className="card card-rounded w-50">
-        <div className="card-header bg-dark text-center">
-          <h1>Plan The Perfect Philly Night!</h1>
-        </div>
-        <div class="card-body m-5">
-          <label>Whatcha Feelin' For Dinner?</label>
-          <br></br>
-          <input
+    <div id="dinner" className="card card-rounded w-50">
+      <div className="card-header bg-dark text-center">
+        <h1>Plan The Perfect Philly Night!</h1>
+      </div>
+      <form>
+        <div className="card-body m-5">
+          <label>Select Budget Range</label>
+          <select
+            name="budget"
+            value={formState.budget}
             onChange={handleChange}
-            name="dinnerOption"
-            value={formState.dinnerOption}
-            placeholder="Italian, Mexican, etc.."
-          ></input>
-        </div>
+          >
+            {" "}
+            <option value="1">$</option>
+            <option value="2">$$</option>
+            <option value="3">$$$</option>
+            <option value="4">$$$$</option>
+          </select>
 
-        <div className="card-footer text-center m-3">
-          <h2>Ready to Move To The Next Step?</h2>
-          {/* <Link to="/matchup"> */}
-          <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">
-            Plan Your Next Step
-          </button>
-          {/* </Link> */}
+          {loading ? (
+            <div>Loading...</div>
+          ) : (
+            <ul className="square">
+              {matchupList.map((matchup) => {
+                return (
+                  <li key={matchup._id}>
+                    <Link to={{ pathname: `/matchup/${matchup._id}` }}>
+                      {matchup.tech1} vs. {matchup.tech2}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
+      </form>
+      <div class="card-body m-5">
+        <label>Whatcha Feelin' For Dinner?</label>
+        <br></br>
+        <input
+          onChange={handleChange}
+          name="dinnerOption"
+          value={formState.dinnerOption}
+          placeholder="Italian, Mexican, etc.."
+        ></input>
       </div>
 
-      <div id="dinner" className="card card-rounded w-50">
-        <div className="card-header bg-dark text-center">
-          <h1>Plan The Perfect Philly Night!</h1>
-        </div>
-        <form>
-          <div className="card-body m-5">
-            <label>Select Budget Range</label>
-            <select
-              name="budget"
-              value={formState.budget}
-              onChange={handleChange}
-            >
-              {" "}
-              <option value="1">$</option>
-              <option value="2">$$</option>
-              <option value="3">$$$</option>
-              <option value="4">$$$$</option>
-            </select>
-
-            {loading ? (
-              <div>Loading...</div>
-            ) : (
-              <ul className="square">
-                {matchupList.map((matchup) => {
-                  return (
-                    <li key={matchup._id}>
-                      <Link to={{ pathname: `/matchup/${matchup._id}` }}>
-                        {matchup.tech1} vs. {matchup.tech2}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-          </div>
-        </form>
-        <div class="card-body m-5">
-          <label>Whatcha Feelin' For Dinner?</label>
-          <br></br>
-          <input
-            onChange={handleChange}
-            name="dinnerOption"
-            value={formState.dinnerOption}
-            placeholder="Italian, Mexican, etc.."
-          ></input>
-        </div>
-
-        <div className="card-footer text-center m-3">
-          <h2>Ready to Move To The Next Step?</h2>
-          {/* <Link to="/matchup"> */}
-          <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">
-            Plan Your Next Step
-          </button>
-          {/* </Link> */}
-        </div>
+      <div className="card-footer text-center m-3">
+        <h2>Ready to Move To The Next Step?</h2>
+        {/* <Link to="/matchup"> */}
+        <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">
+          Plan Your Next Step
+        </button>
+        {/* </Link> */}
       </div>
     </div>
   );
