@@ -17,10 +17,11 @@ const typeDefs = gql`
     restaurant_name: String
     restaurant_URL: String
     restaurant_time: String
-    event_name: String
-    event_URL: String
-    event_time: String
-    event_location: String
+    restaurant_location: String
+    # event_name: String
+    # event_URL: String
+    # event_time: String
+    # event_location: String
   }
 
   type Query {
@@ -33,20 +34,20 @@ const typeDefs = gql`
     addUser (name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addOuting(outing_name: String!, date_time: String!): Outing
-    addRestaurantName(
+    addRestaurant(
       outingID: ID!
       restaurant_name: String!
       restaurant_URL: String
       restaurant_time: String
     ): Outing
    
-    addEventName(
-      outingID: ID!
-      event_name: String!
-      event_URL: String
-      event_time: String
-      event_location: String
-    ): Outing
+   # addEventName(
+      # outingID: ID!
+     # event_name: String!
+     #  event_URL: String
+      # event_time: String
+      # event_location: String
+    # ): Outing
     
     removeRestaurant(
       outingID: ID!
@@ -54,13 +55,13 @@ const typeDefs = gql`
       restaurant_URL: String
       restaurant_time: String
     ): Outing
-    removeEvent(
-      outingID: ID!
-      event_name: String!
-      event_URL: String
-      event_time: String
-      event_location: String
-    )
+    # removeEvent(
+      # outingID: ID!
+      # event_name: String!
+      # event_URL: String
+      # event_time: String
+      # event_location: String
+    #)
   }
 
 `;
