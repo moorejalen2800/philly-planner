@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import Auth from "../../utils/auth";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 
 function Display() {
   const [bus, setBus] = useState();
@@ -11,6 +13,10 @@ function Display() {
       setBus(arrayData.businesses);
     }
   }, []);
+
+  if (!Auth.loggedIn()) {
+    return <Navigate to="/login" />;
+  }
 
   return (
     <div>

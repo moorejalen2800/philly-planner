@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import Auth from "../../utils/auth";
 
 function Home() {
   const navigate = useNavigate();
@@ -10,6 +11,9 @@ function Home() {
   function handleClick(e) {
     e.preventDefault();
     navigate("/create");
+  }
+  if (!Auth.loggedIn()) {
+    return <Navigate to="/signup" />;
   }
   return (
     <div>
