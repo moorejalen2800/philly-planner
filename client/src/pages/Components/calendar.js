@@ -5,15 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 function Cal() {
   const navigate = useNavigate();
-  
-  function selectedDate(e) {
-    var date = e.target.attributes[0].value
-    localStorage.setItem('date', date)
-    navigate("/dinner");
-  }
-  
   window.addEventListener('click', selectedDate)
-
+  
+  async function selectedDate(e) {
+    var date = e.target.attributes[0].value
+    await localStorage.setItem('date', date)
+    window.removeEventListener('click', selectedDate)
+    return navigate("/dinner");
+  }
 
   return (
     <div>
