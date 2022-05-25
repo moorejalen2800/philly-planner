@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 
 function Cal() {
   const navigate = useNavigate();
-<<<<<<< HEAD
   window.addEventListener('click', selectedDate)
   
   async function selectedDate(e) {
@@ -15,16 +14,6 @@ function Cal() {
     window.removeEventListener('click', selectedDate)
     return navigate("/dinner");
   }
-=======
-
-  function selectedDate(e) {
-    var date = e.target.attributes[0].value;
-    localStorage.setItem("date", date);
-    navigate("/dinner");
-  }
-
-  window.addEventListener("click", selectedDate);
->>>>>>> c528500bee0a64d7171ce79bbe72d778e69f51b0
 
   return (
     // <motion.div
