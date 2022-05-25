@@ -17,12 +17,9 @@ function Display() {
       {bus != null ? (
         bus.map((business) => {
           return (
-            <div
-              id="cardContain"
-
-              // style={backgroundImage={business.image_url}}
-            >
-              <motion.card
+            <div id="cardContain">
+              <motion.div
+                style={{ backgroundImage: `url(${business.image_url})` }}
                 className="displayCards"
                 whileHover={{
                   scale: 1.1,
@@ -33,7 +30,11 @@ function Display() {
                 <br></br>
                 <label>Phone:</label>
                 {business.phone}
-              </motion.card>
+                <a href={business.url} target="_blank" rel="noreferer noopener">
+                  Search
+                </a>
+                <button> Add to Outing</button>
+              </motion.div>
             </div>
           );
         })
