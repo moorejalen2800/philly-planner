@@ -24,6 +24,11 @@ const typeDefs = gql`
     # event_location: String
   }
 
+  type Auth {
+    token: ID!
+    user: User
+  }
+
   type Query {
     user(name: String ): User
     outings(name: String): [Outing]
