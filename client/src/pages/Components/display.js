@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 
 function Display() {
   const [bus, setBus] = useState();
@@ -16,13 +17,23 @@ function Display() {
       {bus != null ? (
         bus.map((business) => {
           return (
-            <div id="cardContain">
-              <card className="displayCards">
+            <div
+              id="cardContain"
+
+              // style={backgroundImage={business.image_url}}
+            >
+              <motion.card
+                className="displayCards"
+                whileHover={{
+                  scale: 1.1,
+                  textShadow: "0px 0px 4px gray",
+                }}
+              >
                 {business.name}
                 <br></br>
                 <label>Phone:</label>
                 {business.phone}
-              </card>
+              </motion.card>
             </div>
           );
         })
