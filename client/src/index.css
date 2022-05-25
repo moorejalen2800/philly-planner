@@ -19,11 +19,27 @@ html {
  * Remove the margin in all browsers.
  */
 
+.homeBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cardContain {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
 .displayCards {
+  align-items: flex-end;
   background-color: white;
   margin: 5px;
-  display: grid;
+
   font-weight: 700;
+}
+
+.displayCards:hover {
 }
 
 #dinner {

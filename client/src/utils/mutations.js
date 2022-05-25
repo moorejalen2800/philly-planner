@@ -1,23 +1,71 @@
 import { gql } from '@apollo/client';
 
-export const CREATE_MATCHUP = gql`
-  mutation createMatchup($tech1: String!, $tech2: String!) {
-    createMatchup(tech1: $tech1, tech2: $tech2) {
-      _id
-      tech1
-      tech2
+export const ADD_USER = gql`
+  mutation addUser($name: String!, $email: String!, $password: String!) {
+    addUser(name: $name, email: $email, password: $password) {
+      token
+      user {
+        _id
+        name
+      }
     }
   }
 `;
 
-export const CREATE_VOTE = gql`
-  mutation createVote($_id: String!, $techNum: Int!) {
-    createVote(_id: $_id, techNum: $techNum) {
-      _id
-      tech1
-      tech2
-      tech1_votes
-      tech2_votes
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        name
+      }
     }
   }
 `;
+
+export const ADD_OUTING = gql`
+  mutation addOuting($outingName: String!, $dateTime: String!) {
+    addOuting(outingName: $outingName, dateTime: $dateTime) {
+      _id
+      dateTime
+      outingName
+      createdAt
+      restaurant {
+        _id
+        restaurantName
+        restaurantURL
+        restaurantLocation
+      }
+    }
+  }
+`;
+
+export const ADD_RESTAURANT = gql`
+  mutation addRestaurant(
+    $outingID: ID!
+    $restaurantName: String!
+    $restaurantURL: String
+    $restaurantLocation: String
+  ) {
+    addRestaurant(
+      outingID: $outingId
+      restaurantName: $restaurantName
+      restaurantURL: $restaurantURL
+      restaurantLocation: $restaurantLocation
+    ) {
+      _id
+      dateTime
+      outingName
+      createdAt
+      restaurant {
+        _id
+        restaurantName
+        restaurantURL
+        restaurantLocation
+      }
+    }
+  }
+`;
+
+
