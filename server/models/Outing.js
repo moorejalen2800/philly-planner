@@ -1,22 +1,38 @@
 const { Schema, model} = require('mongoose')
 
 
-const outtingSchema = new Schema({
-  location: {
+const outingSchema = new Schema({
+  dateTime: {
       type: String,
-      required: true
-     
   },
+
+  outingName: {
+      type: String,
+      required: true,
+      trim: true,
+  },
+  
   createdAt: {
       type: Date,
       default: Date.now,
       get: (createdAtValue) => moment(createdAtValue).format('MMM DD, YYYY [at] hh:mm a')
   },
-  username: {
-      type: String,
-      required: true
-  },
-  choices: [outtingSchema]
+  
+  restaurants: [
+      {
+          restaurantName: {
+              type: String,
+              required: true,
+          },
+          restaurantURL: {
+              type: String,
+          },
+          restaurantLocation: {
+              type: String,
+          }
+      }
+  ]
+
   },
   {
   toJSON: {
@@ -29,6 +45,6 @@ const outtingSchema = new Schema({
 
   
 
-const Outting = model('Outting', outtingSchema);
+const Outing = model('Outing', outingSchema);
 
-module.exports = Outting;
+module.exports = Outing;
