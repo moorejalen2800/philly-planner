@@ -25,11 +25,12 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_OUTING = gql`
-  mutation addOuting($outingName: String!, $dateTime: String!) {
-    addOuting(outingName: $outingName, dateTime: $dateTime) {
+  mutation addOuting($dateTime: String!, $outingName: String!, $outingCreator: String!) {
+    addOuting(outingName: $outingName, dateTime: $dateTime, outingCreator: $outingCreator) {
       _id
       dateTime
       outingName
+      outingCreator
       createdAt
       restaurant {
         _id
@@ -57,6 +58,7 @@ export const ADD_RESTAURANT = gql`
       _id
       dateTime
       outingName
+      outingCreator
       createdAt
       restaurant {
         _id

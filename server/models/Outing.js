@@ -11,6 +11,10 @@ const outingSchema = new Schema({
       required: true,
       trim: true,
   },
+
+  outingCreator: {
+      type: String,
+  }
   
   createdAt: {
       type: Date,

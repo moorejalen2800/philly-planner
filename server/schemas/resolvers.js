@@ -41,28 +41,32 @@ const resolvers = {
       return { token, user };
     },
     
-    addRestaurant: async (parent, args) => {
-      const outing = await Outing.create(args);
+    addOuting: async (parent, { dateTime, outingName, outingCreator }) => {
+      const outing = await Outing.create({ dateTime, outingName, outingCreator });
+
+      await User.findOneAndUpdate(
+        {name: outingCreator},
+        { $addToSet: { outings: outing._id }}
+      )
       return outing;
     },
 
-    addRestaurant: async (parent, args) => {
-      const restaurant = await Outing.findOneAndUpdate(
-        { "_id" : args._id},
-        { $set: { restaurant_name: args.restaurant_name, 
-          restaurant_URL: args.restaurant_URL, 
-          restaurant_location: args.restaurant_location }},
-        { new: true }
+    addRestaurant: async (parent, { outingId, restaurantName, restaurantURL, restaurantLocation }) => {
+      return Outing.findOneAndUpdate(
+        { _id : outingId},
+        { $addToSet: { restaurants: { restaurantName, restaurantURL, restaurantLocation } } },
+        { new: true, runValidators: true, }
       );
-      return restaurant;
     },
 
-    removeRestaurant: async (parent, args) => {
+    removeOuting: async (parent, { outingId }) => {
+      return Outing.findOneAndDelete({ _id: outingId });
+    },
+
+    removeRestaurant: async (parent, { outingId, restaurantId }) => {
       return Outing.findOneAndUpdate(
-        { _id : args._id},
-        { $pull: { restaurant_name: args.restaurant_name, 
-          restaurant_URL: args.restaurant_URL, 
-          restaurant_location: args.restaurant_location }},
+        { _id : outingId},
+        { $pull: { restaurants: { _id: restaurantId } }},
         { new: true }
       );
     }
