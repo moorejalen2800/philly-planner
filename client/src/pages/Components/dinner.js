@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../../utils/queries";
-import background from "../../images/skyline.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
@@ -11,8 +10,6 @@ async function getApi(budget, dinnerOption) {
   var requestUrl =
     cors +
     `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}&radius=5000`;
-
-  // `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${resPrice}&categories=${resActivity}`;
 
   try {
     const response = await fetch(requestUrl, {
@@ -36,8 +33,6 @@ const Dinner = () => {
     budget: "",
     dinnerOption: "",
   });
- 
-  const matchupList = data?.matchups || [];
 
   useEffect(() => {
     getApi(formState.budget, formState.dinnerOption);
@@ -67,7 +62,13 @@ const Dinner = () => {
   // fill out budgert and ethiccnic food
   // needs banner at top with login logout info
   return (
-    <div id="dinner" className="card card-rounded w-50">
+    <motion.div
+      id="dinner"
+      className="card card-rounded w-50"
+      initial={{ y: -250 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
       <div className="card-header bg-dark text-center">
         <h1>Plan The Perfect Philly Night!</h1>
       </div>
@@ -106,7 +107,7 @@ const Dinner = () => {
         </button>
         {/* </Link> */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

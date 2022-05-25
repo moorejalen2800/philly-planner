@@ -1,5 +1,5 @@
-import React from 'react';
-import { Navbar, Container } from 'react-bootstrap'
+import React from "react";
+import { Navbar, Container } from "react-bootstrap";
 
 <Navbar>
   <Container>
@@ -11,6 +11,6 @@ import { Navbar, Container } from 'react-bootstrap'
       </Navbar.Text>
     </Navbar.Collapse>
   </Container>
-</Navbar>
+</Navbar>;
 
 export default Navbar;
