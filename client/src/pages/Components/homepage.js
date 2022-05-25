@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate, useParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import Auth from "../../utils/auth";
 
 function Home() {
   const navigate = useNavigate();
@@ -9,7 +10,10 @@ function Home() {
   navigate("/");
   function handleClick(e) {
     e.preventDefault();
-    navigate("/calendar");
+    navigate("/create");
+  }
+  if (!Auth.loggedIn()) {
+    return <Navigate to="/signup" />;
   }
   return (
     <div>
@@ -26,6 +30,7 @@ function Home() {
           options. Let us take the guess work out. Follow our simple prompts{" "}
         </p>
       </motion.div>
+
       <motion.button onClick={(e) => handleClick(e)} className="homeBtn">
         Let's Get Started!
       </motion.button>

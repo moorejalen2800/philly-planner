@@ -1,54 +1,52 @@
-const { Schema, model} = require('mongoose')
+const { Schema, model } = require("mongoose");
 
-
-const outingSchema = new Schema({
-  dateTime: {
+const outingSchema = new Schema(
+  {
+    dateTime: {
       type: String,
-  },
+    },
 
-  outingName: {
+    outingName: {
       type: String,
       required: true,
       trim: true,
-  },
+    },
 
-  outingCreator: {
+    outingCreator: {
       type: String,
-  }
-  
-  createdAt: {
+    },
+
+    createdAt: {
       type: Date,
       default: Date.now,
-      get: (createdAtValue) => moment(createdAtValue).format('MMM DD, YYYY [at] hh:mm a')
-  },
-  
-  restaurants: [
-      {
-          restaurantName: {
-              type: String,
-              required: true,
-          },
-          restaurantURL: {
-              type: String,
-          },
-          restaurantLocation: {
-              type: String,
-          }
-      }
-  ]
+      get: (createdAtValue) =>
+        moment(createdAtValue).format("MMM DD, YYYY [at] hh:mm a"),
+    },
 
+    restaurants: [
+      {
+        restaurantName: {
+          type: String,
+          required: true,
+        },
+        restaurantURL: {
+          type: String,
+        },
+        restaurantLocation: {
+          type: String,
+        },
+      },
+    ],
   },
   {
-  toJSON: {
+    toJSON: {
       virtuals: true,
-      getters: true
-  },
-  id: false
+      getters: true,
+    },
+    id: false,
   }
 );
 
-  
-
-const Outing = model('Outing', outingSchema);
+const Outing = model("Outing", outingSchema);
 
 module.exports = Outing;

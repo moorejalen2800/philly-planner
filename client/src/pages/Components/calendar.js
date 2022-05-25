@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import Auth from "../../utils/auth";
 
 function Cal() {
   const navigate = useNavigate();
-  window.addEventListener('click', selectedDate)
-  
+  window.addEventListener("click", selectedDate);
+
   async function selectedDate(e) {
-    var date = e.target.attributes[0].value
-    await localStorage.setItem('date', date)
-    window.removeEventListener('click', selectedDate)
+    var date = e.target.attributes[0].value;
+    await localStorage.setItem("date", date);
+    window.removeEventListener("click", selectedDate);
     return navigate("/dinner");
   }
-
+  if (!Auth.loggedIn()) {
+    return <Navigate to="/signup" />;
+  }
   return (
     // <motion.div
     //   initial={{ y: -250 }}
