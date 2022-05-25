@@ -4,6 +4,7 @@ import { QUERY_MATCHUPS } from "../../utils/queries";
 import background from "../../images/skyline.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
@@ -70,7 +71,13 @@ const Dinner = () => {
   // fill out budgert and ethiccnic food
   // needs banner at top with login logout info
   return (
-    <div id="dinner" className="card card-rounded w-50">
+    <motion.div
+      id="dinner"
+      className="card card-rounded w-50"
+      initial={{ y: -250 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
       <div className="card-header bg-dark text-center">
         <h1>Plan The Perfect Philly Night!</h1>
       </div>
@@ -125,7 +132,7 @@ const Dinner = () => {
         </button>
         {/* </Link> */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

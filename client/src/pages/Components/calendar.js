@@ -2,15 +2,20 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 
 function Cal() {
   const navigate = useNavigate();
   const [value, onChange] = useState(new Date());
   navigate("/dinner");
   return (
-    <div>
+    <motion.div
+      initial={{ y: -250 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
       <Calendar onChange={onChange} value={value} />
-    </div>
+    </motion.div>
   );
 }
 
