@@ -9,7 +9,7 @@ function Home() {
   navigate("/");
   function handleClick(e) {
     e.preventDefault();
-    console.log("The link was clicked.");
+    navigate("/calendar");
   }
   return (
     <div>
