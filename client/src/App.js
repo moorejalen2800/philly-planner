@@ -6,6 +6,9 @@ import Dinner from "./pages/Components/dinner";
 import Display from "./pages/Components/display";
 import Cal from "./pages/Components/calendar";
 import Home from "./pages/Components/homepage";
+import Create from "./pages/Components/create";
+import Login from "./pages/Components/Login";
+import Signup from "./pages/Components/Signup";
 
 const client = new ApolloClient({
   uri: "/graphql",
@@ -23,6 +26,9 @@ function App() {
             <Route path="/calendar" element={<Cal />} />
             <Route path="/dinner" element={<Dinner />} />
             <Route path="/display" element={<Display />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
           </Routes>
         </div>
       </Router>

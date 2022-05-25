@@ -9,7 +9,7 @@ function Home() {
   navigate("/");
   function handleClick(e) {
     e.preventDefault();
-    navigate("/calendar");
+    navigate("/create");
   }
   return (
     <div>
@@ -26,6 +26,7 @@ function Home() {
           options. Let us take the guess work out. Follow our simple prompts{" "}
         </p>
       </motion.div>
+
       <motion.button onClick={(e) => handleClick(e)} className="homeBtn">
         Let's Get Started!
       </motion.button>
