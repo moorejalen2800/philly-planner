@@ -2,9 +2,15 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import Auth from "../../utils/auth";
 import { useNavigate, Navigate, useParams } from "react-router-dom";
+import { useMutation } from '@apollo/client';
 
-function Display() {
+import { ADD_RESTAURANT } from '../../utils/mutations';
+
+
+function Display({ outingId }) {
   const [bus, setBus] = useState();
+
+  const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
     let arrayData = JSON.parse(localStorage.getItem("restArr"));
@@ -13,6 +19,29 @@ function Display() {
       setBus(arrayData.businesses);
     }
   }, []);
+//Credit: https://www.pluralsight.com/guides/how-to-access-custom-attributes-from-aevent-object-in-react
+  const handleClick = async (e) => {
+    const restaurantName = e.target.getAttribute('data-business-name')
+    const restaurantLocation = e.target.getAttribute('data-business-location')
+    const restaurantURL = e.target.getAttribute('data-business-url')
+
+    try {
+      const { data } = await addRestaurant({
+        variables: {
+          outingId,
+          restaurantName,
+          restaurantURL,
+          restaurantLocation,
+        },
+      });
+    }
+    catch (err) {
+      console.error(err);
+    }
+
+
+
+  }
 
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" />;
@@ -36,7 +65,7 @@ function Display() {
                 <br></br>
                 <label>Phone:</label>
                 {business.phone}
-                <a href={business.url} target="_blank" rel="noreferer noopener">
+                <a href={business.url} onClick={handleClick} data-business-name={business.name} data-business-location={business.location} data-business-url={business.URL} target="_blank" rel="noreferer noopener">
                   Search
                 </a>
                 <button> Add to Outing</button>
