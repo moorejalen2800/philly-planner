@@ -13,6 +13,7 @@ const typeDefs = gql`
     _id: ID!
     dateTime: String
     outingName: String!
+    outingCreator: String!
     createdAt: String
     restaurants: [Restaurant]!
   }
@@ -38,7 +39,7 @@ const typeDefs = gql`
   type Mutation {
     addUser (name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    addOuting(outing_name: String!, date_time: String!): Outing
+    addOuting(dateTime: String!, outingName: String!, outingCreator: String!): Outing
 
     addRestaurant(
       outingID: ID!
@@ -47,6 +48,8 @@ const typeDefs = gql`
       restaurantLocation: String
     ): Outing
    
+    removeOuting(outingId: ID!): Outing
+
     removeRestaurant(
       outingID: ID!
       restaurantID: ID!

@@ -21,6 +21,7 @@ export const QUERY_OUTINGS = gql`
       _id
       dateTime
       outingName
+      outingCreator
       createdAt
     }
   }  
@@ -32,6 +33,7 @@ export const QUERY_OUTING = gql`
       _id
       dateTime
       outingName
+      outingCreator
       restaurants {
         _id
         restaurantName
