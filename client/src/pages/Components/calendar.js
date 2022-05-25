@@ -5,11 +5,19 @@ import { useNavigate } from "react-router-dom";
 
 function Cal() {
   const navigate = useNavigate();
-  const [value, onChange] = useState(new Date());
-  navigate("/dinner");
+  
+  function selectedDate(e) {
+    var date = e.target.attributes[0].value
+    localStorage.setItem('date', date)
+    navigate("/dinner");
+  }
+  
+  window.addEventListener('click', selectedDate)
+
+
   return (
     <div>
-      <Calendar onChange={onChange} value={value} />
+      <Calendar />
     </div>
   );
 }
