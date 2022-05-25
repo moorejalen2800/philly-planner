@@ -2,9 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import Dinner from "./pages/Components/dinner";
-import NavBar from "./pages/Components/navbar";
+// import NavBar from "./pages/Components/navbar";
 import Display from "./pages/Components/display";
-// import Calendar from "./pages/Components/calendar";
 import Cal from "./pages/Components/calendar";
 import Home from "./pages/Components/homepage";
 

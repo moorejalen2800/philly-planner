@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../../utils/queries";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
@@ -34,11 +33,6 @@ const Dinner = () => {
     budget: "",
     dinnerOption: "",
   });
-  const { loading, data } = useQuery(QUERY_MATCHUPS, {
-    fetchPolicy: "no-cache",
-  });
-
-  const matchupList = data?.matchups || [];
 
   useEffect(() => {
     getApi(formState.budget, formState.dinnerOption);
@@ -92,22 +86,6 @@ const Dinner = () => {
             <option value="3">$$$</option>
             <option value="4">$$$$</option>
           </select>
-
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ul className="square">
-              {matchupList.map((matchup) => {
-                return (
-                  <li key={matchup._id}>
-                    <Link to={{ pathname: `/matchup/${matchup._id}` }}>
-                      {matchup.tech1} vs. {matchup.tech2}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
         </div>
       </form>
       <div className="dinnerCard card-body m-5">
