@@ -23,7 +23,7 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    login: async (parent, { email, password }) => {
+    login: async (parent, { name, email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
