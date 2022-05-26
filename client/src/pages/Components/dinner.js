@@ -64,8 +64,6 @@ const Dinner = () => {
   //   .catch((err) => console.log(err));
 
   const handleFormSubmit = async (e) => {
-    console.log(formState.dinnerOption);
-    console.log(formState.budget);
     e.preventDefault();
     await getApi(formState.budget, formState.dinnerOption);
     navigate("/display", { state: { outingId, outingName } });

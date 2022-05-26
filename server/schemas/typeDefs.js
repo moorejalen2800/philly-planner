@@ -40,16 +40,8 @@ const typeDefs = gql`
     addUser (name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     addOuting(dateTime: String!, outingName: String!, outingCreator: String!): Outing
-
-    addRestaurant(
-      outingId: ID!
-      restaurantName: String!
-      restaurantURL: String
-      restaurantLocation: String
-    ): Outing
-   
+    addRestaurant(outingId: ID!, restaurantName: String!, restaurantURL: String, restaurantLocation: String): Outing
     removeOuting(outingId: ID!): Outing
-
     removeRestaurant(
       outingID: ID!
       restaurantID: ID!

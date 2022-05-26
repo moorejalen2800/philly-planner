@@ -43,24 +43,14 @@ export const ADD_OUTING = gql`
 `;
 
 export const ADD_RESTAURANT = gql`
-  mutation addRestaurant(
-    $outingId: ID!
-    $restaurantName: String!
-    $restaurantURL: String
-    $restaurantLocation: String
-  ) {
-    addRestaurant(
-      outingId: $outingId
-      restaurantName: $restaurantName
-      restaurantURL: $restaurantURL
-      restaurantLocation: $restaurantLocation
-    ) {
+  mutation addRestaurant($outingId: ID!, $restaurantName: String!, $restaurantURL: String, $restaurantLocation: String) {
+    addRestaurant(outingId: $outingId, restaurantName: $restaurantName, restaurantURL: $restaurantURL, restaurantLocation: $restaurantLocation) {
       _id
       dateTime
       outingName
       outingCreator
       createdAt
-      restaurant {
+      restaurants {
         _id
         restaurantName
         restaurantURL
