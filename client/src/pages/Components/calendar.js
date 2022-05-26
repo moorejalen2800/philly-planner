@@ -23,7 +23,7 @@ function Cal() {
   //   console.log(value);
   // }
 
-  async function selectedDate(e) {
+  async function selectedDate() {
     // var date = e.target.attributes[0].value;
     const dateTime = value;
     try {
@@ -44,6 +44,7 @@ function Cal() {
   }
 
   const takeToDinner = () => {
+    selectedDate();
     navigate("/dinner", { state: { outingName } });
   };
 

@@ -9,10 +9,11 @@ import { QUERY_OUTING } from '../../utils/queries'
 const cors = "https://cors-anywhere.herokuapp.com/";
 
 async function getApi(budget, dinnerOption) {
+  const dinnerChoice = dinnerOption.toLowerCase()
   var requestUrl =
     cors +
-    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}&radius=5000`;
-
+    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerChoice}&radius=5000`;
+  console.log(requestUrl);
   try {
     const response = await fetch(requestUrl, {
       headers: {
@@ -46,9 +47,9 @@ const Dinner = () => {
   const outing = data?.outing || {};
   const outingId = outing.outingId
 
-  useEffect(() => {
-    getApi(formState.budget, formState.dinnerOption);
-  }, []);
+  // useEffect(() => {
+  //   getApi(formState.budget, formState.dinnerOption);
+  // }, []);
 
   // let resPrice = this.menu.value;
 
@@ -64,6 +65,8 @@ const Dinner = () => {
   //   .catch((err) => console.log(err));
 
   const handleFormSubmit = async (e) => {
+    console.log(formState.dinnerOption);
+    console.log(formState.budget);
     e.preventDefault();
     await getApi(formState.budget, formState.dinnerOption);
     navigate("/display", {state: { outingId }});
