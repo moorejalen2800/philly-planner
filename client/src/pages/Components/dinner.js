@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import { QUERY_OUTING } from '../../utils/queries'
+
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
@@ -28,11 +30,21 @@ async function getApi(budget, dinnerOption) {
 
 const Dinner = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const outingName = state.outingName;
 
   const [formState, setFormState] = useState({
     budget: "",
     dinnerOption: "",
   });
+
+  const { loading, data } = useQuery(QUERY_OUTING, {
+    // pass URL parameter
+    variables: { outingName: outingName },
+  });
+
+  const outing = data?.outing || {};
+  const outingId = outing.outingId
 
   useEffect(() => {
     getApi(formState.budget, formState.dinnerOption);

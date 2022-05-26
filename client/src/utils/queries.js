@@ -28,8 +28,8 @@ export const QUERY_OUTINGS = gql`
 `;
 
 export const QUERY_OUTING = gql`
-  query getSingleOuting($outingId: ID!) {
-    outing(outingId: $outingId) {
+  query getSingleOuting($outingName: String!) {
+    outing(outingName: $outingName) {
       _id
       dateTime
       outingName
