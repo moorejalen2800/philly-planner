@@ -3,7 +3,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 // import ReactBootstrapStyle from "@bit/react-bootstrap.react-bootstrap.internal.style-links";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Create() {
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ function Create() {
   navigate("/");
   function handleClick(e) {
     e.preventDefault();
-    navigate("/calendar");
+    navigate("/calendar", {state: { outingName, outingCreator }});
   }
   return (
     <motion.div

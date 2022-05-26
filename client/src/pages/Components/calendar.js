@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { ADD_OUTING } from '../../utils/mutations';
 
 import "react-calendar/dist/Calendar.css";
@@ -34,8 +34,10 @@ function Cal() {
 
     await localStorage.setItem("date", date);
     window.removeEventListener("click", selectedDate);
-    return navigate("/dinner");
+    return navigate("/dinner", {state: { outingName }});
   }
+
+
   if (!Auth.loggedIn()) {
     return <Navigate to="/signup" />;
   }
