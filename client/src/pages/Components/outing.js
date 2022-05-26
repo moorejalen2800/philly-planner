@@ -23,9 +23,9 @@ function Outing() {
   const outingDate = outing.dateTime;
   const outingNames = outing.outingName;
   const outingMaker = outing.outingCreator;
-  const restname = outing.restaurants.restaurantName;
-  const restLoc = outing.restaurants.restaurantLocation;
-  const restWeb = outing.restaurants.restaurantURL;
+  const restname = outing.restaurants[0].restaurantName;
+  const restLoc = outing.restaurants[0].restaurantLocation;
+  const restWeb = outing.restaurants[0].restaurantURL;
   return (
     <motion.div
       initial={{ y: -250 }}
@@ -38,7 +38,7 @@ function Outing() {
       </p>
       <p>
         We heard that {restname} is pretty good, so be sure to check out their
-        menu before hand at <a href={restWeb}></a>
+        menu before hand at <a href={restWeb}> their website.</a>
       </p>
     </motion.div>
   );

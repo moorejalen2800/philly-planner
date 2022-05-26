@@ -13,7 +13,7 @@ import { ADD_RESTAURANT } from "../../utils/mutations";
 function Display() {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location.state);
+  // console.log(location.state);
   const [bus, setBus] = useState();
   // const [outingId, setOutingId] = useState('');
   const outingId = location.state.outingId;
@@ -49,7 +49,6 @@ function Display() {
     } catch (err) {
       console.error(err);
     }
-    console.log(outingName);
     navigate("/outing", { state: { outingName } });
   };
 
@@ -86,8 +85,8 @@ function Display() {
                 <button
                   onClick={handleClick}
                   data-business-name={business.name}
-                  data-business-location={business.location}
-                  data-business-url={business.URL}
+                  data-business-location={business.location.address1}
+                  data-business-url={business.url}
                 >
                   {" "}
                   Add to Outing
