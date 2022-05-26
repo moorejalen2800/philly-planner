@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
@@ -9,8 +9,24 @@ function Create() {
   const navigate = useNavigate();
   //   const [value, onChange] = useState(new Date());
   navigate("/");
+  const { state } = useLocation();
+  const outingCreator = state.outingCreator;
+  const [formState, setFormState] = useState({
+    outingName: '',
+  })
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
+
   function handleClick(e) {
     e.preventDefault();
+    const outingName = formState.outingName;
     navigate("/calendar", {state: { outingName, outingCreator }});
   }
   return (
@@ -29,9 +45,9 @@ function Create() {
           <h1>What's The Occasion?</h1>
           <br></br>
           <input
-            // onChange={handleChange}
-            name="dinnerOption"
-            // value={formState.dinnerOption}
+            onChange={handleChange}
+            name="outingName"
+            value={formState.outingName}
             placeholder="Bach Brunch.."
           ></input>
         </div>
