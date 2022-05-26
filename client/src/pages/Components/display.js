@@ -16,6 +16,7 @@ function Display() {
   const [bus, setBus] = useState();
   const location = useLocation();
   const outingId = location.state.outingId;
+  const outingName = location.state.outingName;
   const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
@@ -40,10 +41,10 @@ function Display() {
           restaurantLocation,
         },
       });
-      navigate("/display", { state: { outingId } });
     } catch (err) {
       console.error(err);
     }
+    navigate("/outing", { state: { outingName } });
   };
 
   if (!Auth.loggedIn()) {

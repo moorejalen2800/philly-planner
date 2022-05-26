@@ -32,7 +32,7 @@ export const ADD_OUTING = gql`
       outingName
       outingCreator
       createdAt
-      restaurant {
+      restaurants {
         _id
         restaurantName
         restaurantURL
@@ -44,13 +44,13 @@ export const ADD_OUTING = gql`
 
 export const ADD_RESTAURANT = gql`
   mutation addRestaurant(
-    $outingID: ID!
+    $outingId: ID!
     $restaurantName: String!
     $restaurantURL: String
     $restaurantLocation: String
   ) {
     addRestaurant(
-      outingID: $outingId
+      outingId: $outingId
       restaurantName: $restaurantName
       restaurantURL: $restaurantURL
       restaurantLocation: $restaurantLocation
