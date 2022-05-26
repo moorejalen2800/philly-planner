@@ -12,8 +12,8 @@ function Create() {
   const location = useLocation();
   const outingCreator = location.state.outingCreator;
   const [formState, setFormState] = useState({
-    outingName: '',
-  })
+    outingName: "",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,7 +29,7 @@ function Create() {
     const outingName = formState.outingName;
     console.log(outingName);
     console.log(outingCreator);
-    navigate("/calendar", {state: { outingName, outingCreator }});
+    navigate("/calendar", { state: { outingName, outingCreator } });
   }
   return (
     <motion.div

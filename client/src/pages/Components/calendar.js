@@ -15,7 +15,7 @@ function Cal() {
   const outingName = location.state.outingName;
   const outingCreator = location.state.outingCreator;
 
-  const [value, onChange] = useState(new Date())
+  const [value, onChange] = useState(new Date());
 
   // const onDateChange = (event) => {
   //   const {value} = event.target
@@ -60,10 +60,7 @@ function Cal() {
     //   <Calendar onChange={onChange} value={value} />
     // </motion.div>
     <div>
-      <Calendar 
-        onChange={onChange}
-        value={value}
-      />
+      <Calendar onChange={onChange} value={value} />
 
       {outingName && (
         <button onClick={takeToDinner}>Now let's choose a restaurant!</button>
