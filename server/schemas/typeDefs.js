@@ -19,7 +19,7 @@ const typeDefs = gql`
   }
 
   type Restaurant {
-    _id: ID!
+    _id: ID
     restaurantName: String!
     restaurantURL: String
     restaurantLocation: String
@@ -42,7 +42,7 @@ const typeDefs = gql`
     addOuting(dateTime: String!, outingName: String!, outingCreator: String!): Outing
 
     addRestaurant(
-      outingID: ID!
+      outingId: ID!
       restaurantName: String!
       restaurantURL: String
       restaurantLocation: String

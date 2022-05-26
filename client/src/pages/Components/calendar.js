@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import { useMutation, useQuery } from '@apollo/client';
-import { ADD_OUTING } from '../../utils/mutations';
-
+import { useMutation } from "@apollo/client";
+import { ADD_OUTING } from "../../utils/mutations";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
@@ -10,15 +9,23 @@ import Auth from "../../utils/auth";
 
 function Cal() {
   const navigate = useNavigate();
-  window.addEventListener("click", selectedDate);
+  // window.addEventListener("click", selectedDate);
   const [addOuting, { error }] = useMutation(ADD_OUTING);
-  const { state } = useLocation();
-  const outingName = state.outingName;
-  const outingCreator = state.outingCreator;
+  const location = useLocation();
+  const outingName = location.state.outingName;
+  const outingCreator = location.state.outingCreator;
+
+  const [value, onChange] = useState(new Date())
+
+  // const onDateChange = (event) => {
+  //   const {value} = event.target
+  //   setDate(value);
+  //   console.log(value);
+  // }
 
   async function selectedDate(e) {
-    var date = e.target.attributes[0].value;
-    const dateTime = date
+    // var date = e.target.attributes[0].value;
+    const dateTime = value;
     try {
       const { data } = await addOuting({
         variables: {
@@ -27,16 +34,18 @@ function Cal() {
           outingCreator,
         },
       });
-    }
-    catch (err) {
+      console.log(data);
+    } catch (err) {
       console.error(err);
     }
 
-    await localStorage.setItem("date", date);
-    window.removeEventListener("click", selectedDate);
-    return navigate("/dinner", {state: { outingName }});
+    await localStorage.setItem("date", value);
+    // window.removeEventListener("click", selectedDate);
   }
 
+  const takeToDinner = () => {
+    navigate("/dinner", { state: { outingName } });
+  };
 
   if (!Auth.loggedIn()) {
     return <Navigate to="/signup" />;
@@ -50,7 +59,14 @@ function Cal() {
     //   <Calendar onChange={onChange} value={value} />
     // </motion.div>
     <div>
-      <Calendar />
+      <Calendar 
+        onChange={onChange}
+        value={value}
+      />
+
+      {outingName && (
+        <button onClick={takeToDinner}>Now let's choose a restaurant!</button>
+      )}
     </div>
   );
 }

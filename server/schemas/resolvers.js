@@ -6,7 +6,7 @@ const { signToken } = require('../utils/auth');
 const resolvers = {
   Query: {
     user: async (parent, { name }) => {
-      return User.findOne({ name }).populate('thoughts');
+      return User.findOne({ name }).populate('outings');
     },
     outings: async (parent, { name }) => {
       const params = name ? { name } : {};
@@ -52,6 +52,8 @@ const resolvers = {
     },
 
     addRestaurant: async (parent, { outingId, restaurantName, restaurantURL, restaurantLocation }) => {
+      console.log(outingId);
+      console.log(restaurantName);
       return Outing.findOneAndUpdate(
         { _id : outingId},
         { $addToSet: { restaurants: { restaurantName, restaurantURL, restaurantLocation } } },

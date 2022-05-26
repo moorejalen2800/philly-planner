@@ -8,9 +8,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 function Create() {
   const navigate = useNavigate();
   //   const [value, onChange] = useState(new Date());
-  navigate("/");
-  const { state } = useLocation();
-  const outingCreator = state.outingCreator;
+  // navigate("/");
+  const location = useLocation();
+  const outingCreator = location.state.outingCreator;
   const [formState, setFormState] = useState({
     outingName: '',
   })
@@ -27,6 +27,8 @@ function Create() {
   function handleClick(e) {
     e.preventDefault();
     const outingName = formState.outingName;
+    console.log(outingName);
+    console.log(outingCreator);
     navigate("/calendar", {state: { outingName, outingCreator }});
   }
   return (

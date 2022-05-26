@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+import { QUERY_USER } from '../../utils/queries';
 import { useNavigate, Navigate, useParams, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import Auth from "../../utils/auth";
@@ -9,9 +9,9 @@ import Auth from "../../utils/auth";
 function Home() {
   const navigate = useNavigate();
   //   const [value, onChange] = useState(new Date());
-  navigate("/");
-  const { state } = useLocation();
-  const name = state.name;
+  // navigate("/");
+  const location = useLocation();
+  const name = location.state.name;
 
   const { loading, data } = useQuery(QUERY_USER, {
     // pass URL parameter
@@ -23,11 +23,12 @@ function Home() {
   const outingCreator = user.name
   function handleClick(e) {
     e.preventDefault();
+    console.log(outingCreator);
     navigate("/create", {state: { outingCreator }});
   }
-  if (!Auth.loggedIn()) {
-    return <Navigate to="/signup" />;
-  }
+  // if (!Auth.loggedIn()) {
+  //   return <Navigate to="/signup" />;
+  // }
   return (
     <div>
       <motion.div
