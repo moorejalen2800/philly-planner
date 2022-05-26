@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import Auth from "../../utils/auth";
-import { useNavigate, Navigate, useParams, useLocation } from "react-router-dom";
-import { useMutation } from '@apollo/client';
-import { ADD_RESTAURANT } from '../../utils/mutations';
-
-
-
+import {
+  useNavigate,
+  Navigate,
+  useParams,
+  useLocation,
+} from "react-router-dom";
+import { useMutation } from "@apollo/client";
+import { ADD_RESTAURANT } from "../../utils/mutations";
 
 function Display() {
   const navigate = useNavigate();
@@ -14,6 +16,7 @@ function Display() {
   const [bus, setBus] = useState();
   const location = useLocation();
   const outingId = location.state.outingId;
+  const outingName = location.state.outingName;
   const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
@@ -23,11 +26,11 @@ function Display() {
       setBus(arrayData.businesses);
     }
   }, []);
-//Credit: https://www.pluralsight.com/guides/how-to-access-custom-attributes-from-aevent-object-in-react
+  //Credit: https://www.pluralsight.com/guides/how-to-access-custom-attributes-from-aevent-object-in-react
   const handleClick = async (e) => {
-    const restaurantName = e.target.getAttribute('data-business-name')
-    const restaurantLocation = e.target.getAttribute('data-business-location')
-    const restaurantURL = e.target.getAttribute('data-business-url')
+    const restaurantName = e.target.getAttribute("data-business-name");
+    const restaurantLocation = e.target.getAttribute("data-business-location");
+    const restaurantURL = e.target.getAttribute("data-business-url");
 
     try {
       const { data } = await addRestaurant({
@@ -38,15 +41,11 @@ function Display() {
           restaurantLocation,
         },
       });
-      navigate("/display", {state: { outingId }});
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err);
     }
-
-
-
-  }
+    navigate("/outing", { state: { outingName } });
+  };
 
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" />;
@@ -59,7 +58,12 @@ function Display() {
           return (
             <div key={business.name} id="cardContain">
               <motion.div
-                style={{ backgroundImage: `url(${business.image_url})` }}
+                style={{
+                  backgroundImage: `url(${business.image_url})`,
+                  // width: 100,
+                  // height: 100,
+                  // objectFit: contain,
+                }}
                 className="displayCards"
                 whileHover={{
                   scale: 1.1,
@@ -73,7 +77,15 @@ function Display() {
                 <a href={business.url} target="_blank" rel="noreferer noopener">
                   Search
                 </a>
-                <button onClick={handleClick} data-business-name={business.name} data-business-location={business.location} data-business-url={business.URL}> Add to Outing</button>
+                <button
+                  onClick={handleClick}
+                  data-business-name={business.name}
+                  data-business-location={business.location}
+                  data-business-url={business.URL}
+                >
+                  {" "}
+                  Add to Outing
+                </button>
               </motion.div>
             </div>
           );

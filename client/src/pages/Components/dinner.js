@@ -3,13 +3,12 @@ import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
-import { QUERY_OUTING } from '../../utils/queries'
-
+import { QUERY_OUTING } from "../../utils/queries";
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
 async function getApi(budget, dinnerOption) {
-  const dinnerChoice = dinnerOption.toLowerCase()
+  const dinnerChoice = dinnerOption.toLowerCase();
   var requestUrl =
     cors +
     `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerChoice}&radius=5000`;
@@ -31,8 +30,8 @@ async function getApi(budget, dinnerOption) {
 
 const Dinner = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
-  const outingName = state.outingName;
+  const location = useLocation();
+  const outingName = location.state.outingName;
 
   const [formState, setFormState] = useState({
     budget: "",
@@ -45,7 +44,7 @@ const Dinner = () => {
   });
 
   const outing = data?.outing || {};
-  const outingId = outing.outingId
+  const outingId = outing.outingId;
 
   // useEffect(() => {
   //   getApi(formState.budget, formState.dinnerOption);
@@ -69,7 +68,7 @@ const Dinner = () => {
     console.log(formState.budget);
     e.preventDefault();
     await getApi(formState.budget, formState.dinnerOption);
-    navigate("/display", {state: { outingId }});
+    navigate("/display", { state: { outingId, outingName } });
   };
 
   // user names event date
