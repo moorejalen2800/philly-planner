@@ -54,7 +54,7 @@ const Dinner = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await getApi(formState.budget, formState.dinnerOption);
-    navigate("/display");
+    navigate("/display", {state: { outingId }});
   };
 
   // user names event date

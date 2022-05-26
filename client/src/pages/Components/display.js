@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import Auth from "../../utils/auth";
-import { useNavigate, Navigate, useParams } from "react-router-dom";
+import { useNavigate, Navigate, useParams, useLocation } from "react-router-dom";
 import { useMutation } from '@apollo/client';
-
 import { ADD_RESTAURANT } from '../../utils/mutations';
 
 
-function Display({ outingId }) {
-  const [bus, setBus] = useState();
 
+
+function Display() {
+  const [bus, setBus] = useState();
+  const { state } = useLocation();
+  const outingId = state.outingId;
   const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
