@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { QUERY_MATCHUPS } from "../../utils/queries";
-import background from "../../images/skyline.jpg";
 import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import { QUERY_OUTING } from '../../utils/queries'
+
 
 const cors = "https://cors-anywhere.herokuapp.com/";
 
 async function getApi(budget, dinnerOption) {
   var requestUrl =
     cors +
-    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}`;
-
-  // `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${resPrice}&categories=${resActivity}`;
+    `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerOption}&radius=5000`;
 
   try {
     const response = await fetch(requestUrl, {
@@ -22,25 +22,34 @@ async function getApi(budget, dinnerOption) {
     });
     const data = await response.json();
     console.log(data);
+    localStorage.setItem("restArr", JSON.stringify(data));
   } catch (error) {
     console.log(error);
   }
 }
 
 const Dinner = () => {
+  const navigate = useNavigate();
+  const { state } = useLocation();
+  const outingName = state.outingName;
+
   const [formState, setFormState] = useState({
     budget: "",
     dinnerOption: "",
   });
-  const { loading, data } = useQuery(QUERY_MATCHUPS, {
-    fetchPolicy: "no-cache",
+
+  const { loading, data } = useQuery(QUERY_OUTING, {
+    // pass URL parameter
+    variables: { outingName: outingName },
   });
 
-  const matchupList = data?.matchups || [];
+  const outing = data?.outing || {};
+  const outingId = outing.outingId
 
   useEffect(() => {
     getApi(formState.budget, formState.dinnerOption);
   }, []);
+
   // let resPrice = this.menu.value;
 
   const handleChange = (event) => {
@@ -48,12 +57,29 @@ const Dinner = () => {
 
     setFormState({ ...formState, [name]: value });
   };
+
+  // const searchForm = (query) =>
+  // dinnerOption.search(query)
+  //   .then((res) => setFormState(res.data))
+  //   .catch((err) => console.log(err));
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    await getApi(formState.budget, formState.dinnerOption);
+    navigate("/display", {state: { outingId }});
+  };
+
+  // user names event date
+  // populate calendar and select date
+  // fill out budgert and ethiccnic food
+  // needs banner at top with login logout info
   return (
-    <div
-      style={{
-        backgroundImage: `url(${background})`,
-      }}
+    <motion.div
+      id="dinner"
       className="card card-rounded w-50"
+      initial={{ y: -250 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100 }}
     >
       <div className="card-header bg-dark text-center">
         <h1>Plan The Perfect Philly Night!</h1>
@@ -72,26 +98,10 @@ const Dinner = () => {
             <option value="3">$$$</option>
             <option value="4">$$$$</option>
           </select>
-
-          {loading ? (
-            <div>Loading...</div>
-          ) : (
-            <ul className="square">
-              {matchupList.map((matchup) => {
-                return (
-                  <li key={matchup._id}>
-                    <Link to={{ pathname: `/matchup/${matchup._id}` }}>
-                      {matchup.tech1} vs. {matchup.tech2}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          )}
         </div>
       </form>
-      <div class="card-body m-5">
-        <label>Whatcha Feelin' For Dinner?</label>
+      <div className="dinnerCard card-body m-5">
+        <label className="dinnerText">Whatcha Feelin' For Dinner?</label>
         <br></br>
         <input
           onChange={handleChange}
@@ -103,11 +113,13 @@ const Dinner = () => {
 
       <div className="card-footer text-center m-3">
         <h2>Ready to Move To The Next Step?</h2>
-        <Link to="/matchup">
-          <button className="btn btn-lg btn-danger">Plan Your Next Step</button>
-        </Link>
+        {/* <Link to="/matchup"> */}
+        <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">
+          Plan Your Next Step
+        </button>
+        {/* </Link> */}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
