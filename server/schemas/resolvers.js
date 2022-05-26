@@ -12,8 +12,8 @@ const resolvers = {
       const params = name ? { name } : {};
       return Outing.find(params).sort({created_at: -1});
     },
-    outing: async (parent, { outingId }) => {
-      return Outing.findOne({_id: outingId})
+    outing: async (parent, { outingName }) => {
+      return Outing.findOne({outingName: outingName})
     }
 
   },
