@@ -12,7 +12,6 @@ function Outing() {
   const navigate = useNavigate();
   const location = useLocation();
   const outingName = location.state.outingName;
-  console.log(outingName);
   const { loading, data } = useQuery(QUERY_OUTING, {
     // pass URL parameter
     variables: { outingName: outingName },
@@ -20,7 +19,7 @@ function Outing() {
 
   const outing = data?.outing || {};
   console.log(outing);
-  const outingId = outing.outingId;
+  const outingId = outing._id;
   const outingDate = outing.dateTime;
   const outingNames = outing.outingName;
   const outingMaker = outing.outingCreator;

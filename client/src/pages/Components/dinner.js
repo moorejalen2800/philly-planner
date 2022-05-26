@@ -44,7 +44,8 @@ const Dinner = () => {
   });
 
   const outing = data?.outing || {};
-  const outingId = outing.outingId;
+  console.log(outing);
+  const outingId = outing._id;
 
   // useEffect(() => {
   //   getApi(formState.budget, formState.dinnerOption);
