@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
@@ -7,6 +7,8 @@ import { ADD_USER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [formState, setFormState] = useState({
     name: "",
     email: "",
@@ -23,8 +25,13 @@ const Signup = () => {
     });
   };
 
+  const goToHome = () => {
+    navigate("/", {state: { name: formState.name }})
+  }
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    event.stopPropagation();
     console.log(formState);
 
     try {
@@ -47,7 +54,7 @@ const Signup = () => {
             {data ? (
               <p>
                 Success! You may now head{" "}
-                <Link to={{pathname: "/", state: { name: formState.name }}}>back to the homepage.</Link>
+                <button  onClick={() => {goToHome()}}>back to the homepage.</button>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>
