@@ -9,9 +9,11 @@ import { ADD_RESTAURANT } from '../../utils/mutations';
 
 
 function Display() {
+  const navigate = useNavigate();
+
   const [bus, setBus] = useState();
-  const { state } = useLocation();
-  const outingId = state.outingId;
+  const location = useLocation();
+  const outingId = location.state.outingId;
   const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
@@ -36,6 +38,7 @@ function Display() {
           restaurantLocation,
         },
       });
+      navigate("/display", {state: { outingId }});
     }
     catch (err) {
       console.error(err);
@@ -54,7 +57,7 @@ function Display() {
       {bus != null ? (
         bus.map((business) => {
           return (
-            <div id="cardContain">
+            <div key={business.name} id="cardContain">
               <motion.div
                 style={{ backgroundImage: `url(${business.image_url})` }}
                 className="displayCards"
@@ -67,10 +70,10 @@ function Display() {
                 <br></br>
                 <label>Phone:</label>
                 {business.phone}
-                <a href={business.url} onClick={handleClick} data-business-name={business.name} data-business-location={business.location} data-business-url={business.URL} target="_blank" rel="noreferer noopener">
+                <a href={business.url} target="_blank" rel="noreferer noopener">
                   Search
                 </a>
-                <button> Add to Outing</button>
+                <button onClick={handleClick} data-business-name={business.name} data-business-location={business.location} data-business-url={business.URL}> Add to Outing</button>
               </motion.div>
             </div>
           );
