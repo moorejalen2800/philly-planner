@@ -48,7 +48,6 @@ const Signup = () => {
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
-<<<<<<< HEAD
         <div className="card">
           <h4 className="card-header bg-dark text-light p-2 text-center">
             Sign Up
@@ -69,16 +68,6 @@ const Signup = () => {
                   Back To Home
                 </button>
               </p>
-=======
-        <div className="card" style={{backgroundColor: "rgba(170, 170, 170, 0.5)"}}>
-          <h4 className="card-header bg-dark text-light p-2 text-center">Sign Up</h4>
-          <div className="dinnerCard text-center card-body m-5">
-            {data ? (
-              <h5>
-                Success! You may now head{" "}
-                <button  onClick={() => {goToHome()}} class="mt-4">back to the homepage.</button>
-              </h5>
->>>>>>> ba171f48e3e9561b7c92ef89f2a9903604fd7f6e
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
