@@ -87,7 +87,7 @@ const Dinner = () => {
       </div>
       <form>
         <div className="card-body m-5">
-          <label>Select Budget Range</label>
+          <label className="text-center">Select Budget Range</label>
           <select
             name="budget"
             value={formState.budget}
@@ -102,7 +102,9 @@ const Dinner = () => {
         </div>
       </form>
       <div className="dinnerCard card-body m-5">
-        <label className="dinnerText">Whatcha Feelin' For Dinner?</label>
+        <label className="dinnerText text-center">
+          Whatcha Feelin' For Dinner?
+        </label>
         <br></br>
         <input
           onChange={handleChange}
@@ -112,7 +114,7 @@ const Dinner = () => {
         ></input>
       </div>
 
-      <div className="card-footer text-center m-3">
+      <div className="card-footer text-center m-3 text-center">
         <h2>Ready to Move To The Next Step?</h2>
         {/* <Link to="/matchup"> */}
         <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">

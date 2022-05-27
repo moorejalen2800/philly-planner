@@ -95,6 +95,7 @@ function Display() {
                   Search
                 </a>
                 <button
+                  className="btn btn-block btn-primary"
                   onClick={handleClick}
                   data-business-name={business.name}
                   data-business-location={business.location.address1}

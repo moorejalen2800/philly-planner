@@ -72,7 +72,13 @@ function Cal() {
       <Calendar onChange={onChange} value={value} />
 
       {outingName && (
-        <button onClick={takeToDinner}>Now let's choose a restaurant!</button>
+        <button
+          className="btn btn-block btn-primary"
+          onClick={takeToDinner}
+          style={{ margin: "5px" }}
+        >
+          Now let's choose a restaurant!
+        </button>
       )}
     </motion.div>
   );

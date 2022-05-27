@@ -60,7 +60,7 @@ function Home() {
 
       <motion.button
         onClick={(e) => handleClick(e)}
-        className="homeBtn"
+        className="homeBtn btn btn-block btn-primary"
         style={{ justifyContent: "center" }}
       >
         Let's Get Started!
