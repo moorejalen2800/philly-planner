@@ -11,22 +11,28 @@ import { QUERY_OUTING } from "../../utils/queries";
 function Outing() {
   const navigate = useNavigate();
   const location = useLocation();
-  const outingName = location.state.outingName;
-  console.log(outingName);
+  const outingId = location.state.outingId;
   const { loading, data } = useQuery(QUERY_OUTING, {
     // pass URL parameter
-    variables: { outingName: outingName },
+    variables: { outingId: outingId },
   });
 
   const outing = data?.outing || {};
   console.log(outing);
-  const outingId = outing.outingId;
+  const outId = outing._id;
   const outingDate = outing.dateTime;
   const outingNames = outing.outingName;
   const outingMaker = outing.outingCreator;
-  const restname = outing.restaurants.restaurantName;
-  const restLoc = outing.restaurants.restaurantLocation;
-  const restWeb = outing.restaurants.restaurantURL;
+  const restList = outing.restaurants;
+  console.log(restList);
+  // const restname = outing.restaurants[0].restaurantName;
+  // const restLoc = outing.restaurants[0].restaurantLocation;
+  // const restWeb = outing.restaurants[0].restaurantURL;
+
+  function handleClick(e) {
+    e.preventDefault();
+    navigate("/dinner", { state: { outingId } });
+  }
   return (
     <motion.div
       initial={{ y: -250 }}
@@ -37,10 +43,21 @@ function Outing() {
       <p>
         Can't wait for {outingNames}, on {outingDate}
       </p>
+      {restList.map((restaurant) => {
+        return (
+          <div key={restaurant._id}>
+            <p >
+            We heard that {restaurant.restaurantName} is pretty good, so be sure to check out their
+            menu at <a href={restaurant.restaurantURL}> their website</a> before you head over to {restaurant.restaurantLocation}.
+            </p>
+          </div>
+        );
+      })}
+      
       <p>
-        We heard that {restname} is pretty good, so be sure to check out their
-        menu before hand at <a href={restWeb}></a>
+        Would you like to add another location to your outing?
       </p>
+     <button onClick={(e) => handleClick(e)} className="btn btn-lg btn-danger">Choose another location!</button>
     </motion.div>
   );
 }

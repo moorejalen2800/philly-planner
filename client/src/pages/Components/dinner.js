@@ -31,7 +31,7 @@ async function getApi(budget, dinnerOption) {
 const Dinner = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const outingName = location.state.outingName;
+  const outingId = location.state.outingId;
 
   const [formState, setFormState] = useState({
     budget: "",
@@ -40,11 +40,12 @@ const Dinner = () => {
 
   const { loading, data } = useQuery(QUERY_OUTING, {
     // pass URL parameter
-    variables: { outingName: outingName },
+    variables: { outingId: outingId },
   });
 
   const outing = data?.outing || {};
-  const outingId = outing.outingId;
+  console.log(outing);
+  const outingName = outing.outingName;
 
   // useEffect(() => {
   //   getApi(formState.budget, formState.dinnerOption);
@@ -66,7 +67,7 @@ const Dinner = () => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     await getApi(formState.budget, formState.dinnerOption);
-    navigate("/display", { state: { outingId, outingName } });
+    navigate("/display", { state: { outingId } });
   };
 
   // user names event date

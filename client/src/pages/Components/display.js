@@ -12,15 +12,19 @@ import { ADD_RESTAURANT } from "../../utils/mutations";
 
 function Display() {
   const navigate = useNavigate();
-
-  const [bus, setBus] = useState();
   const location = useLocation();
+  // console.log(location.state);
+  const [bus, setBus] = useState();
+  // const [outingId, setOutingId] = useState('');
   const outingId = location.state.outingId;
-  console.log("outing Id ", outingId);
-  const outingName = location.state.outingName;
+
+  // console.log("outing Id ", outingId);
+  // const outingName = location.state.outingName;
   const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
+    // setOutingId(location.state.outingId);
+    // console.log("outing Id ", outingId);
     let arrayData = JSON.parse(localStorage.getItem("restArr"));
     console.log(arrayData);
     if (arrayData != null) {
@@ -45,8 +49,7 @@ function Display() {
     } catch (err) {
       console.error(err);
     }
-    console.log(outingName);
-    navigate("/outing", { state: { outingName } });
+    navigate("/outing", { state: { outingId } });
   };
 
   if (!Auth.loggedIn()) {
@@ -82,8 +85,8 @@ function Display() {
                 <button
                   onClick={handleClick}
                   data-business-name={business.name}
-                  data-business-location={business.location}
-                  data-business-url={business.URL}
+                  data-business-location={business.location.address1}
+                  data-business-url={business.url}
                 >
                   {" "}
                   Add to Outing

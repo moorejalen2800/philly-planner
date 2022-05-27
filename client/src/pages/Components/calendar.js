@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Calendar from "react-calendar";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { ADD_OUTING } from "../../utils/mutations";
+import { QUERY_OUTING } from "../../utils/queries";
 import "react-calendar/dist/Calendar.css";
 import { useNavigate, Navigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
@@ -14,8 +15,9 @@ function Cal() {
   const location = useLocation();
   const outingName = location.state.outingName;
   const outingCreator = location.state.outingCreator;
-
+  console.log(outingCreator, outingName);
   const [value, onChange] = useState(new Date());
+  // const [outingId, setOutId] = useState();
 
   // const onDateChange = (event) => {
   //   const {value} = event.target
@@ -35,6 +37,9 @@ function Cal() {
         },
       });
       console.log(data);
+      
+      const outId = data?.addOuting._id || {};
+      return outId
     } catch (err) {
       console.error(err);
     }
@@ -43,9 +48,9 @@ function Cal() {
     // window.removeEventListener("click", selectedDate);
   }
 
-  const takeToDinner = () => {
-    selectedDate();
-    navigate("/dinner", { state: { outingName } });
+  const takeToDinner = async () => {
+    const outingId = await selectedDate();
+    navigate("/dinner", { state: { outingId } });
   };
 
   if (!Auth.loggedIn()) {
