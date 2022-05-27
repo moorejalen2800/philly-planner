@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   createHttpLink,
   ApolloClient,
@@ -46,13 +46,13 @@ function App() {
       <Router>
         <div className="flex-column justify-center align-center min-100-vh bg-primary">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Signup />} />
             <Route path="/calendar" element={<Cal />} />
             <Route path="/dinner" element={<Dinner />} />
             <Route path="/display" element={<Display />} />
             <Route path="/create" element={<Create />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
+            {/* <Route path="/signup" element={<Signup />} /> */}
             <Route path="/outing" element={<Outing />} />
           </Routes>
         </div>
