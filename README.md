@@ -7,8 +7,7 @@ GitHbu Link - https://github.com/kgiunta/philly-planner
 
 # Deployed 
 
-https://fierce-hollows-17492.herokuapp.com/
-
+https://calm-springs-96591.herokuapp.com
 
 # Description
 
