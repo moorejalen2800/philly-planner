@@ -39,6 +39,7 @@ function Home() {
         // className="displayCards"
         initial={{ y: -250 }}
         animate={{ y: 0 }}
+        exit={{ y: 250 }}
         //   transition={{ type: "spring", stiffness: 100 }}
         style={{
           backgroundColor: "rgba(127, 131, 137, 0.6)",
@@ -59,6 +60,9 @@ function Home() {
       </motion.div>
 
       <motion.button
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5, transition: 3.0 }}
         onClick={(e) => handleClick(e)}
         className="homeBtn btn btn-block btn-primary"
         style={{ justifyContent: "center" }}

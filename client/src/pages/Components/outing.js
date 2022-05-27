@@ -36,7 +36,14 @@ function Outing() {
   return (
     <motion.div
       className="card card-rounded w-50"
-      style={{ backgroundColor: "rgba(162, 161, 164, 0.4) " }}
+      style={{
+        backgroundColor: "transparent",
+        backgroundImage:
+          "url(https://media.giphy.com/media/nbJUuYFI6s0w0/giphy.gif)",
+        color: "white",
+        backgroundPosition: "200px center",
+        borderRadius: "25px",
+      }}
       initial={{ y: -250 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
