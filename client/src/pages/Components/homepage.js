@@ -36,20 +36,33 @@ function Home() {
   return (
     <div>
       <motion.div
-        className="displayCards"
+        // className="displayCards"
         initial={{ y: -250 }}
         animate={{ y: 0 }}
         //   transition={{ type: "spring", stiffness: 100 }}
+        style={{
+          backgroundColor: "rgba(127, 131, 137, 0.6)",
+          borderRadius: "25px",
+        }}
       >
-        <h1> Welcome to Philly Planner</h1>
-        <p>
+        <h1
+          className="text-center"
+          style={{ color: "white", textShadow: "-1px -1px 0 #000" }}
+        >
+          Welcome to Philly Planner
+        </h1>
+        <p style={{ fontWeight: "bolder" }}>
           {" "}
           We know it's over whelming to plan a night out in a city with so many
           options. Let us take the guess work out. Follow our simple prompts{" "}
         </p>
       </motion.div>
 
-      <motion.button onClick={(e) => handleClick(e)} className="homeBtn">
+      <motion.button
+        onClick={(e) => handleClick(e)}
+        className="homeBtn"
+        style={{ justifyContent: "center" }}
+      >
         Let's Get Started!
       </motion.button>
     </div>

@@ -37,9 +37,9 @@ function Cal() {
         },
       });
       console.log(data);
-      
+
       const outId = data?.addOuting._id || {};
-      return outId
+      return outId;
     } catch (err) {
       console.error(err);
     }
@@ -64,13 +64,17 @@ function Cal() {
     // >
     //   <Calendar onChange={onChange} value={value} />
     // </motion.div>
-    <div>
+    <motion.div
+      initial={{ y: -250 }}
+      animate={{ y: 0 }}
+      transition={{ type: "spring", stiffness: 100 }}
+    >
       <Calendar onChange={onChange} value={value} />
 
       {outingName && (
         <button onClick={takeToDinner}>Now let's choose a restaurant!</button>
       )}
-    </div>
+    </motion.div>
   );
 }
 

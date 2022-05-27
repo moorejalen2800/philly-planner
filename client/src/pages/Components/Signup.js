@@ -26,8 +26,8 @@ const Signup = () => {
   };
 
   const goToHome = () => {
-    navigate("/", {state: { name: formState.name }})
-  }
+    navigate("/", { state: { name: formState.name } });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -54,7 +54,7 @@ const Signup = () => {
             {data ? (
               <h5>
                 Success! You may now head{" "}
-                <button  onClick={() => {goToHome()}}>back to the homepage.</button>
+                <button  onClick={() => {goToHome()}} class="mt-4">back to the homepage.</button>
               </h5>
             ) : (
               <form onSubmit={handleFormSubmit}>
