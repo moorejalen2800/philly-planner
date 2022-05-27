@@ -19,7 +19,7 @@ function Display() {
   const outingId = location.state.outingId;
 
   // console.log("outing Id ", outingId);
-  const outingName = location.state.outingName;
+  // const outingName = location.state.outingName;
   const [addRestaurant, { error }] = useMutation(ADD_RESTAURANT);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ function Display() {
     } catch (err) {
       console.error(err);
     }
-    navigate("/outing", { state: { outingName } });
+    navigate("/outing", { state: { outingId } });
   };
 
   if (!Auth.loggedIn()) {

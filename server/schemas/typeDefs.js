@@ -33,7 +33,7 @@ const typeDefs = gql`
   type Query {
     user(name: String ): User
     outings(name: String): [Outing]
-    outing(outingName: String!): Outing
+    outing(outingId: String!): Outing
   }
 
   type Mutation {

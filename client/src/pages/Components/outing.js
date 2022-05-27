@@ -11,15 +11,15 @@ import { QUERY_OUTING } from "../../utils/queries";
 function Outing() {
   const navigate = useNavigate();
   const location = useLocation();
-  const outingName = location.state.outingName;
+  const outingId = location.state.outingId;
   const { loading, data } = useQuery(QUERY_OUTING, {
     // pass URL parameter
-    variables: { outingName: outingName },
+    variables: { outingId: outingId },
   });
 
   const outing = data?.outing || {};
   console.log(outing);
-  const outingId = outing._id;
+  const outId = outing._id;
   const outingDate = outing.dateTime;
   const outingNames = outing.outingName;
   const outingMaker = outing.outingCreator;
@@ -31,7 +31,7 @@ function Outing() {
 
   function handleClick(e) {
     e.preventDefault();
-    navigate("/dinner", { state: { outingName } });
+    navigate("/dinner", { state: { outingId } });
   }
   return (
     <motion.div

@@ -19,7 +19,6 @@ function Create() {
     const { name, value } = event.target;
 
     setFormState({
-      ...formState,
       [name]: value,
     });
   };
@@ -27,8 +26,6 @@ function Create() {
   function handleClick(e) {
     e.preventDefault();
     const outingName = formState.outingName;
-    console.log(outingName);
-    console.log(outingCreator);
     navigate("/calendar", { state: { outingName, outingCreator } });
   }
   return (
