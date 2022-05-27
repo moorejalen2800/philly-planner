@@ -1,12 +1,14 @@
-# philly-planner
+# Philly-Planner App
 
 Philly Planner offers couples of all ages a seamless solution to crafting perfect date night experiences without,
 hard work or creativity !
 
+GitHbu Link - https://github.com/kgiunta/philly-planner
+
 
 # Description
 
-Based on your location users can also access our DataBase to find exclusive date night experiences at the best restaurants for the Philadelphia area 
+Based on your location users can access our DataBase to find exclusive date night experiences at the best restaurants for the Philadelphia area 
 
 
 # Table of Contents
@@ -18,12 +20,17 @@ Based on your location users can also access our DataBase to find exclusive date
   - [Questions](#questions)
 
 # Installation
-
-You will need to run "npm install inquirer" for the inquirer package.
+To begin navigate to https://fierce-hollows-17492.herokuapp.com/signup
 
 # Usage
 
-Clone my repository to your local machine, run "npm install inquirer" in the terminal, and then run "node index.js" to be prompted with questions that will generate your readme file.
+Navigate to signup or login and after logging in the user will be presented with a unique outing planner based in the Philadelphia area. Users can create new events, select calendar dates, choose restaurants by price and category, and add new restaurants to their outing.
+
+# ScreenShot
+
+<img width="1099" alt="Screen Shot 2022-05-26 at 11 01 59 PM" src="https://user-images.githubusercontent.com/100977121/170621734-8cd7e83f-0f38-47e1-9ce2-484d27f4712c.png">
+
+
 
 # License
 
