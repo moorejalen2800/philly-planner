@@ -95,10 +95,12 @@ function Display() {
                   Search
                 </a>
                 <button
+                  className="btn btn-block btn-primary"
                   onClick={handleClick}
                   data-business-name={business.name}
                   data-business-location={business.location.address1}
                   data-business-url={business.url}
+                  styles={{ display: "flex", alignItems: "flex-end" }}
                 >
                   {" "}
                   Add to Outing

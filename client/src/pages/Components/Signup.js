@@ -48,6 +48,28 @@ const Signup = () => {
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
+<<<<<<< HEAD
+        <div className="card">
+          <h4 className="card-header bg-dark text-light p-2 text-center">
+            Sign Up
+          </h4>
+          <div
+            className="card-body"
+            style={{ backgroundColor: "rgba(162, 161, 164, 0.4) " }}
+          >
+            {data ? (
+              <p style={{ fontWeight: "bolder" }}>
+                Success! You may now head back to the homepage.{" "}
+                <button
+                  className="btn btn-lg btn-danger text-center"
+                  onClick={() => {
+                    goToHome();
+                  }}
+                >
+                  Back To Home
+                </button>
+              </p>
+=======
         <div className="card" style={{backgroundColor: "rgba(170, 170, 170, 0.5)"}}>
           <h4 className="card-header bg-dark text-light p-2 text-center">Sign Up</h4>
           <div className="dinnerCard text-center card-body m-5">
@@ -56,6 +78,7 @@ const Signup = () => {
                 Success! You may now head{" "}
                 <button  onClick={() => {goToHome()}} class="mt-4">back to the homepage.</button>
               </h5>
+>>>>>>> ba171f48e3e9561b7c92ef89f2a9903604fd7f6e
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input

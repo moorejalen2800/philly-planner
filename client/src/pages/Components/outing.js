@@ -36,7 +36,14 @@ function Outing() {
   return (
     <motion.div
       className="card card-rounded w-50"
-      style={{ backgroundColor: "rgba(162, 161, 164, 0.4) " }}
+      style={{
+        backgroundColor: "transparent",
+        backgroundImage:
+          "url(https://media.giphy.com/media/nbJUuYFI6s0w0/giphy.gif)",
+        color: "white",
+        backgroundPosition: "200px center",
+        borderRadius: "25px",
+      }}
       initial={{ y: -250 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
@@ -51,8 +58,15 @@ function Outing() {
             <p style={{ fontWeight: "bolder" }}>
               We heard that {restaurant.restaurantName} is pretty good, so be
               sure to check out their menu at{" "}
-              <a href={restaurant.restaurantURL}> their website</a> before you
-              head over to {restaurant.restaurantLocation}.
+              <a
+                href={restaurant.restaurantURL}
+                target="_blank"
+                rel="noreferer noopener"
+              >
+                {" "}
+                their website
+              </a>{" "}
+              before you head over to {restaurant.restaurantLocation}.
             </p>
           </div>
         );

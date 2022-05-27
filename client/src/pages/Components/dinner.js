@@ -5,12 +5,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import { QUERY_OUTING } from "../../utils/queries";
 
-const cors = "https://cors-anywhere.herokuapp.com/";
+// const cors = "https://cors-anywhere.herokuapp.com/";
 
 async function getApi(budget, dinnerOption) {
   const dinnerChoice = dinnerOption.toLowerCase();
   var requestUrl =
-    cors +
+    // cors +
     `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerChoice}&radius=5000`;
   console.log(requestUrl);
   try {
@@ -87,7 +87,7 @@ const Dinner = () => {
       </div>
       <form>
         <div className="card-body m-5">
-          <label>Select Budget Range</label>
+          <label className="text-center">Select Budget Range</label>
           <select
             name="budget"
             value={formState.budget}
@@ -102,7 +102,9 @@ const Dinner = () => {
         </div>
       </form>
       <div className="dinnerCard card-body m-5">
-        <label className="dinnerText">Whatcha Feelin' For Dinner?</label>
+        <label className="dinnerText text-center">
+          Whatcha Feelin' For Dinner?
+        </label>
         <br></br>
         <input
           onChange={handleChange}
@@ -112,7 +114,7 @@ const Dinner = () => {
         ></input>
       </div>
 
-      <div className="card-footer text-center m-3">
+      <div className="card-footer text-center m-3 text-center">
         <h2>Ready to Move To The Next Step?</h2>
         {/* <Link to="/matchup"> */}
         <button onClick={handleFormSubmit} className="btn btn-lg btn-danger">
