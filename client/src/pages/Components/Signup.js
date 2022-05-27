@@ -26,8 +26,8 @@ const Signup = () => {
   };
 
   const goToHome = () => {
-    navigate("/", {state: { name: formState.name }})
-  }
+    navigate("/", { state: { name: formState.name } });
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -49,12 +49,27 @@ const Signup = () => {
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
         <div className="card">
-          <h4 className="card-header bg-dark text-light p-2">Sign Up</h4>
-          <div className="card-body">
+          <h4
+            className="card-header bg-dark text-light p-2"
+            style={{ alignItems: "center" }}
+          >
+            Sign Up
+          </h4>
+          <div
+            className="card-body"
+            style={{ backgroundColor: "rgba(127, 131, 137, 0.5)" }}
+          >
             {data ? (
-              <p>
-                Success! You may now head{" "}
-                <button  onClick={() => {goToHome()}}>back to the homepage.</button>
+              <p style={{ fontWeight: "bolder" }}>
+                Success! You may now head back to the homepage.{" "}
+                <button
+                  style={{ display: "flex", justifyContent: "center" }}
+                  onClick={() => {
+                    goToHome();
+                  }}
+                >
+                  Back To Home
+                </button>
               </p>
             ) : (
               <form onSubmit={handleFormSubmit}>

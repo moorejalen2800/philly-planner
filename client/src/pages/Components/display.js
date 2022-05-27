@@ -61,10 +61,21 @@ function Display() {
       {bus != null ? (
         bus.map((business) => {
           return (
-            <div key={business.name} id="cardContain">
+            <div
+              key={business.name}
+              id="cardContain"
+              style={{ display: "block" }}
+            >
               <motion.div
                 style={{
                   backgroundImage: `url(${business.image_url})`,
+                  backgroundRepeat: "no-repeat",
+                  width: 250,
+                  height: 250,
+                  backgroundSize: "cover",
+                  color: "white",
+                  fontWeight: "bolder",
+
                   // width: 100,
                   // height: 100,
                   // objectFit: contain,
@@ -72,13 +83,14 @@ function Display() {
                 className="displayCards"
                 whileHover={{
                   scale: 1.1,
-                  textShadow: "0px 0px 4px gray",
+                  textShadow: "5px 5px 4px gray",
                 }}
               >
-                {business.name}
+                <p styles={{ alignItems: "center" }}>{business.name}</p>
                 <br></br>
                 <label>Phone:</label>
                 {business.phone}
+                <br></br>
                 <a href={business.url} target="_blank" rel="noreferer noopener">
                   Search
                 </a>
