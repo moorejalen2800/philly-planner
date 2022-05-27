@@ -5,12 +5,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import { QUERY_OUTING } from "../../utils/queries";
 
-const cors = "https://cors-anywhere.herokuapp.com/";
+// const cors = "https://cors-anywhere.herokuapp.com/";
 
 async function getApi(budget, dinnerOption) {
   const dinnerChoice = dinnerOption.toLowerCase();
   var requestUrl =
-    cors +
+    // cors +
     `https://api.yelp.com/v3/businesses/search?latitude=39.9526&longitude=-75.1652&price=${budget}&categories=${dinnerChoice}&radius=5000`;
   console.log(requestUrl);
   try {

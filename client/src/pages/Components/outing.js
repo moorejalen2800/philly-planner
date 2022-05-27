@@ -58,8 +58,15 @@ function Outing() {
             <p style={{ fontWeight: "bolder" }}>
               We heard that {restaurant.restaurantName} is pretty good, so be
               sure to check out their menu at{" "}
-              <a href={restaurant.restaurantURL}> their website</a> before you
-              head over to {restaurant.restaurantLocation}.
+              <a
+                href={restaurant.restaurantURL}
+                target="_blank"
+                rel="noreferer noopener"
+              >
+                {" "}
+                their website
+              </a>{" "}
+              before you head over to {restaurant.restaurantLocation}.
             </p>
           </div>
         );
