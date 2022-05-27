@@ -52,7 +52,7 @@ function App() {
             <Route path="/display" element={<Display />} />
             <Route path="/create" element={<Create />} />
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/signup" element={<Signup />} /> */}
+            <Route path="/homepage" element={<Home />} />
             <Route path="/outing" element={<Outing />} />
           </Routes>
         </div>

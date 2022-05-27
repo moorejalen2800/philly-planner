@@ -26,7 +26,7 @@ const Signup = () => {
   };
 
   const goToHome = () => {
-    navigate("/", { state: { name: formState.name } });
+    navigate("/homepage", { state: { name: formState.name } });
   };
 
   const handleFormSubmit = async (event) => {
