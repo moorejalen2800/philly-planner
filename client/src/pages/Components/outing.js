@@ -35,29 +35,39 @@ function Outing() {
   }
   return (
     <motion.div
+      className="card card-rounded w-50"
+      style={{ backgroundColor: "rgba(162, 161, 164, 0.4) " }}
       initial={{ y: -250 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100 }}
     >
-      <h1>Hey, {outingMaker}!</h1>
-      <p>
+      <h1 className="text-center">Hey, {outingMaker}!</h1>
+      <p style={{ fontWeight: "bolder" }}>
         Can't wait for {outingNames}, on {outingDate}
       </p>
       {restList.map((restaurant) => {
         return (
           <div key={restaurant._id}>
-            <p >
-            We heard that {restaurant.restaurantName} is pretty good, so be sure to check out their
-            menu at <a href={restaurant.restaurantURL}> their website</a> before you head over to {restaurant.restaurantLocation}.
+            <p style={{ fontWeight: "bolder" }}>
+              We heard that {restaurant.restaurantName} is pretty good, so be
+              sure to check out their menu at{" "}
+              <a href={restaurant.restaurantURL}> their website</a> before you
+              head over to {restaurant.restaurantLocation}.
             </p>
           </div>
         );
       })}
-      
-      <p>
+
+      <p className="text-center" style={{ fontWeight: "bolder" }}>
         Would you like to add another location to your outing?
       </p>
-     <button onClick={(e) => handleClick(e)} className="btn btn-lg btn-danger">Choose another location!</button>
+      <button
+        onClick={(e) => handleClick(e)}
+        className="btn btn-lg btn-danger text-center"
+        style={{ justifyContent: "center", width: "100%" }}
+      >
+        Choose another location!
+      </button>
     </motion.div>
   );
 }
