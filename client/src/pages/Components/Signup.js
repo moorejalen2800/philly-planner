@@ -48,29 +48,14 @@ const Signup = () => {
   return (
     <main className="flex-row justify-center mb-4">
       <div className="col-12 col-lg-10">
-        <div className="card">
-          <h4
-            className="card-header bg-dark text-light p-2"
-            style={{ alignItems: "center" }}
-          >
-            Sign Up
-          </h4>
-          <div
-            className="card-body"
-            style={{ backgroundColor: "rgba(127, 131, 137, 0.5)" }}
-          >
+        <div className="card" style={{backgroundColor: "rgba(170, 170, 170, 0.5)"}}>
+          <h4 className="card-header bg-dark text-light p-2 text-center">Sign Up</h4>
+          <div className="dinnerCard text-center card-body m-5">
             {data ? (
-              <p style={{ fontWeight: "bolder" }}>
-                Success! You may now head back to the homepage.{" "}
-                <button
-                  style={{ display: "flex", justifyContent: "center" }}
-                  onClick={() => {
-                    goToHome();
-                  }}
-                >
-                  Back To Home
-                </button>
-              </p>
+              <h5>
+                Success! You may now head{" "}
+                <button  onClick={() => {goToHome()}} class="mt-4">back to the homepage.</button>
+              </h5>
             ) : (
               <form onSubmit={handleFormSubmit}>
                 <input
